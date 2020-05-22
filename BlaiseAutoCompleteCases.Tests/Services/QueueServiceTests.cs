@@ -61,24 +61,6 @@ namespace BlaiseAutoCompleteCases.Tests.Services
 
 
         [Test]
-        public void Given_I_Call_PublishMessage_Then_The_Message_Is_Published()
-        {
-            //arrange
-            var message = "Test Message";
-            _queueProviderMock.Setup(q => q.ForProject(It.IsAny<string>())).Returns(_queueProviderMock.Object);
-            _queueProviderMock.Setup(q => q.ForTopic(It.IsAny<string>())).Returns(_queueProviderMock.Object);
-            _queueProviderMock.Setup(q => q.Publish(It.IsAny<string>(), null));
-
-            //act
-            _sut.PublishMessage(message);
-
-            //assert
-            _queueProviderMock.Verify(v => v.ForProject(_projectId), Times.Once);
-            _queueProviderMock.Verify(v => v.ForTopic(_topicId), Times.Once);
-            _queueProviderMock.Verify(v => v.Publish(message, null), Times.Once);
-        }
-
-        [Test]
         public void Given_I_Call_CancelAllSubscriptions_Then_The_Correct_Call_Is_Made()
         {
             //arrange

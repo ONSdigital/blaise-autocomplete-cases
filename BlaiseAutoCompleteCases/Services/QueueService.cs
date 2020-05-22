@@ -25,14 +25,6 @@ namespace BlaiseAutoCompleteCases.Services
                 .StartConsuming(messageHandler);
         }
 
-        public void PublishMessage(string message)
-        {
-            _queueProvider
-                .ForProject(_configurationProvider.ProjectId)
-                .ForTopic(_configurationProvider.TopicId)
-                .Publish(message);
-        }
-
         public void CancelAllSubscriptions()
         {
             _queueProvider
