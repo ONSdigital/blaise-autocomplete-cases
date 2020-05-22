@@ -191,6 +191,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\Mappers\ICompletionModelMapper.cs" />
     <Compile Include="Interfaces\Providers\IConfigurationProvider.cs" />
+    <Compile Include="Interfaces\Services\IBlaiseApiNew.cs" />
     <Compile Include="Services\CompleteCaseService.cs" />
     <Compile Include="Services\FindCasesToCompleteService.cs" />
     <Compile Include="Interfaces\Services\IFindCasesToCompleteService.cs" />

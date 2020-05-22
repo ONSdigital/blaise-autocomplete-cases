@@ -26,6 +26,10 @@ namespace BlaiseAutoCompleteCases.MessageHandler
         {
             try
             {
+                //Calling mapper here
+
+                //calling find cases to complete service
+
 
                 return true;
             }

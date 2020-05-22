@@ -1,14 +1,31 @@
-﻿using NUnit.Framework;
+﻿using BlaiseAutoCompleteCases.Interfaces.Mappers;
+using BlaiseAutoCompleteCases.Interfaces.Services;
+using log4net;
+using Moq;
+using NUnit.Framework;
 
 namespace BlaiseAutoCompleteCases.Tests.Services
 {
     public class FindCasesToCompleteServiceTests
     {
+        private Mock<ILog> _loggingMock;
+        private Mock<ICompletionModelMapper> _mapperMock;
+        private Mock<IFindCasesToCompleteService> _findCasesToCompleteService;
+
+        [SetUp]
+        public void SetUpTests()
+        {
+            _loggingMock = new Mock<ILog>();
+            _mapperMock = new Mock<ICompletionModelMapper>();
+            _findCasesToCompleteService = new Mock<IFindCasesToCompleteService>();
+            _findCasesToCompleteService.Setup(p => p.FindCasesToComplete(It.IsAny<string>(), 0));
+        }
 
         [Test]
-        public void Given_A_Null_InstrumentName_When_I_Call_FindCasesToCompleteService_Then_A_NullArgumentException_Is_Thrown()
+        public void Given_A_Null_SurveyName_When_I_Call_FindCasesToCompleteService_Then_A_NullArgumentException_Is_Thrown()
         {
             //arrange
+            _findCasesToCompleteService.Setup(p => p.FindCasesToComplete(It.IsAny<string>(), 0));
 
             //act
 
@@ -16,7 +33,7 @@ namespace BlaiseAutoCompleteCases.Tests.Services
         }
 
         [Test]
-        public void Given_An_Empty_InstrumentName_When_I_Call_FindCasesToCompleteService_Then_An_ArgumentException_Is_Thrown()
+        public void Given_An_Empty_SurveyName_When_I_Call_FindCasesToCompleteService_Then_An_ArgumentException_Is_Thrown()
         {
             //arrange
 

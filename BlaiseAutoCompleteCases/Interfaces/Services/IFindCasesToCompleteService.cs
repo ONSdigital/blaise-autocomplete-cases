@@ -2,6 +2,6 @@
 {
     public interface IFindCasesToCompleteService
     {
-        void FindCasesToComplete(string instrumentName, int numberOfCasesToComplete);
+        void FindCasesToComplete(string surveyName, int numberOfCasesToComplete);
     }
 }
