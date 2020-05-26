@@ -30,7 +30,6 @@ namespace BlaiseAutoCompleteCases.MessageHandler
 
                 //calling find cases to complete service
 
-
                 return true;
             }
             catch (Exception e)
