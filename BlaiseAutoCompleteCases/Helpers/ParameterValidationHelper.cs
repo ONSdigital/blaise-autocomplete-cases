@@ -1,5 +1,4 @@
 ﻿using System;
-using StatNeth.Blaise.API.DataRecord;
 
 namespace BlaiseAutoCompleteCases.Helpers
 {

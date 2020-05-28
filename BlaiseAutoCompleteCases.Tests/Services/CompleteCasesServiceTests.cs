@@ -123,11 +123,11 @@ namespace BlaiseAutoCompleteCases.Tests.Services
             _loggingMock.Verify(v => v.Info("No Cases Found to Complete"), Times.Once);
         }
 
-        [TestCase(1, 1)]
-        [TestCase(10, 10)]
-        [TestCase(10, 5)]
-        [TestCase(5, 10)]
-        public void Given_X_Cases_To_Complete_And_Y_Cases_Available_When_I_Call_FindCasesToCompleteService_Then_The_Appropriate_Cases_Are_Completed(int casesToComplete, int casesAvailable)
+        [TestCase(1, 1, 1)]
+        [TestCase(10, 10, 10)]
+        [TestCase(5, 10, 5)]
+        [TestCase(10, 5, 5)]
+        public void Given_X_Cases_To_Complete_And_Y_Cases_Available_When_I_Call_FindCasesToCompleteService_Then_The_Expected_Cases_Are_Completed(int casesToComplete, int casesAvailable, int expectedCases)
         {
             //arrange
             _blaiseApiMock.Setup(p => p.GetAllSurveys()).Returns(_surveys);
@@ -149,8 +149,7 @@ namespace BlaiseAutoCompleteCases.Tests.Services
             _sut.CompleteCases(_instrumentName, casesToComplete);
 
             //assert
-            _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<IDataRecord>(), _instrumentName, _serverParkName), Times.Exactly(casesAvailable));
+            _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<IDataRecord>(), _instrumentName, _serverParkName), Times.Exactly(expectedCases));
         }
-
     }
 }

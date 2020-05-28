@@ -21,12 +21,10 @@ namespace BlaiseAutoCompleteCases.Tests.MessageHandler
         private readonly CompletionModel _completionModel;
 
         private CaseCompletionHandler _sut;
-        private readonly string _instrumentName;
 
         public CaseCompletionHandlerTests()
         {
             _message = "Test message";
-            _instrumentName = "OPN2004A";
             _completionModel = new CompletionModel();
         }
 

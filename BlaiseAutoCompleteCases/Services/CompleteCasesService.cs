@@ -31,12 +31,12 @@ namespace BlaiseAutoCompleteCases.Services
 
             foreach (var survey in surveys)
             {
-                if (numberOfCasesToComplete == caseCompletedCounter) continue;
-
                 var dataSet = _blaiseApi.GetDataSet(survey.Name, survey.ServerPark);
 
                 while (!dataSet.EndOfSet)
                 {
+                    if (numberOfCasesToComplete == caseCompletedCounter) break;
+
                     if (!_blaiseApi.CaseHasBeenCompleted(dataSet.ActiveRecord))
                     {
                         _completeCaseService.CompleteCase(dataSet.ActiveRecord, survey.Name, survey.ServerPark);

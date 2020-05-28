@@ -1,14 +1,11 @@
 ﻿using Blaise.Nuget.Api.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Services;
 using BlaiseAutoCompleteCases.Services;
 using log4net;
 using Moq;
 using NUnit.Framework;
-using StatNeth.Blaise.API.DataLink;
 using StatNeth.Blaise.API.ServerManager;
 using System;
-using System.Collections.Generic;
-using IDataRecord = StatNeth.Blaise.API.DataRecord.IDataRecord;
+using StatNeth.Blaise.API.DataRecord;
 
 namespace BlaiseAutoCompleteCases.Tests.Services
 {
@@ -19,9 +16,6 @@ namespace BlaiseAutoCompleteCases.Tests.Services
         private Mock<IBlaiseApi> _blaiseApiMock;
         private readonly string _instrumentName;
         private readonly string _serverParkName;
-        private readonly List<ISurvey> _surveys;
-        private Mock<IDataSet> _dataSetMock;
-        private Mock<ICompleteCaseService> _completeCaseServiceMock;
 
         public CompleteCaseServiceTests()
         {
@@ -31,7 +25,6 @@ namespace BlaiseAutoCompleteCases.Tests.Services
             var survey1Mock = new Mock<ISurvey>();
             survey1Mock.Setup(a => a.Name).Returns(_instrumentName);
             survey1Mock.Setup(a => a.ServerPark).Returns(_serverParkName);
-            _surveys = new List<ISurvey> { survey1Mock.Object };
         }
 
         [SetUp]
@@ -39,9 +32,6 @@ namespace BlaiseAutoCompleteCases.Tests.Services
         {
             _loggingMock = new Mock<ILog>();
             _blaiseApiMock = new Mock<IBlaiseApi>();
-            _dataSetMock = new Mock<IDataSet>();
-            _completeCaseServiceMock = new Mock<ICompleteCaseService>();
-
 
             _sut = new CompleteCaseService(_loggingMock.Object, _blaiseApiMock.Object);
 

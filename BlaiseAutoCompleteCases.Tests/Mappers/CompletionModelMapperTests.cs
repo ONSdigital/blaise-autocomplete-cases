@@ -1,5 +1,4 @@
-﻿using System;
-using BlaiseAutoCompleteCases.Mappers;
+﻿using BlaiseAutoCompleteCases.Mappers;
 using BlaiseAutoCompleteCases.Models;
 using Newtonsoft.Json;
 using NUnit.Framework;
