@@ -1,7 +1,9 @@
-﻿namespace BlaiseAutoCompleteCases.Interfaces.Services
+﻿using StatNeth.Blaise.API.DataRecord;
+
+namespace BlaiseAutoCompleteCases.Interfaces.Services
 {
     public interface ICompleteCaseService
     {
-        void CompleteCase();
+        void CompleteCase(IDataRecord dataRecord, string instrumentName, string serverPark);
     }
 }

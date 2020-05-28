@@ -181,11 +181,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\CompletionModelMapperTests.cs" />
+    <Compile Include="MessageHandler\CaseCompletionHandlerTests.cs" />
     <Compile Include="Providers\ConfigurationProviderTests.cs" />
     <Compile Include="Services\CaseCompletionHandlerTests.cs" />
-    <Compile Include="Services\FindCasesToCompleteServiceTests.cs" />
+    <Compile Include="Services\CompleteCasesServiceTests.cs" />
     <Compile Include="Services\InitialiseServiceTests.cs" />
     <Compile Include="Services\QueueServiceTests.cs" />
+    <Compile Include="Services\CompleteCaseServiceTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,10 +202,7 @@
       <Name>BlaiseAutoCompleteCases</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mappers\" />
-    <Folder Include="MessageHandler\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

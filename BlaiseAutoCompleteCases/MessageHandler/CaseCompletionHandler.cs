@@ -10,12 +10,12 @@ namespace BlaiseAutoCompleteCases.MessageHandler
     {
         private readonly ILog _logger;
         private readonly ICompletionModelMapper _completionModelMapper;
-        private readonly IFindCasesToCompleteService _findCasesToCompleteService;
+        private readonly ICompleteCasesService _findCasesToCompleteService;
 
         public CaseCompletionHandler(
             ILog logger,
             ICompletionModelMapper completionModelMapper, 
-            IFindCasesToCompleteService findCasesToCompleteService)
+            ICompleteCasesService findCasesToCompleteService)
         {
             _logger = logger;
             _completionModelMapper = completionModelMapper;
@@ -26,15 +26,22 @@ namespace BlaiseAutoCompleteCases.MessageHandler
         {
             try
             {
+                _logger.Info($"Message received '{message}'");
+
                 //Calling mapper here
+                var completionModel = _completionModelMapper.MapToCompletionModel(message);
 
                 //calling find cases to complete service
+                _findCasesToCompleteService.CompleteCases(completionModel.SurveyName, completionModel.NumberOfCasesToComplete);
+
+                _logger.Info($"Message processed '{message}'");
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.Error(e);
+                _logger.Error(ex);
+                _logger.Info($"Error processing message '{message}'");
 
                 return false;
             }                       

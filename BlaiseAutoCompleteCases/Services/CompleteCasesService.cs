@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Blaise.Nuget.Api.Contracts.Interfaces;
+﻿using Blaise.Nuget.Api.Contracts.Interfaces;
 using BlaiseAutoCompleteCases.Helpers;
 using BlaiseAutoCompleteCases.Interfaces.Services;
 using log4net;
-using StatNeth.Blaise.API.DataRecord;
-using StatNeth.Blaise.API.ServerManager;
+using System.Linq;
 
 namespace BlaiseAutoCompleteCases.Services
 {
-    public class FindCasesToCompleteService : IFindCasesToCompleteService
+    public class CompleteCasesService : ICompleteCasesService
     {
         private readonly ILog _logger;
         private readonly IBlaiseApi _blaiseApi;
         private readonly ICompleteCaseService _completeCaseService;
 
-        public FindCasesToCompleteService(
+        public CompleteCasesService(
             ILog logger, 
             IBlaiseApi blaiseApi, 
             ICompleteCaseService completeCaseService)
@@ -26,7 +22,7 @@ namespace BlaiseAutoCompleteCases.Services
             _completeCaseService = completeCaseService;
         }
 
-        public void FindCasesToComplete(string surveyName, int numberOfCasesToComplete)
+        public void CompleteCases(string surveyName, int numberOfCasesToComplete)
         {
             surveyName.ThrowExceptionIfNullOrEmpty("surveyName");
             numberOfCasesToComplete.ThrowExceptionIfLessThanOrEqualToZero("numberOfCasesToComplete");
@@ -43,7 +39,7 @@ namespace BlaiseAutoCompleteCases.Services
                 {
                     if (!_blaiseApi.CaseHasBeenCompleted(dataSet.ActiveRecord))
                     {
-                        _blaiseApi.MarkCaseAsComplete(dataSet.ActiveRecord, survey.Name, survey.ServerPark);
+                        _completeCaseService.CompleteCase(dataSet.ActiveRecord, survey.Name, survey.ServerPark);
                         caseCompletedCounter++;
                     }
                     dataSet.MoveNext();
@@ -52,7 +48,7 @@ namespace BlaiseAutoCompleteCases.Services
 
             if (caseCompletedCounter == 0)
             {
-                _logger.Info($"No Cases Found to Complete");
+                _logger.Info("No Cases Found to Complete");
             }
         }
     }
