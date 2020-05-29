@@ -1,4 +1,5 @@
 ﻿using System;
+using StatNeth.Blaise.Data.DataStructure;
 
 namespace BlaiseAutoCompleteCases.Helpers
 {
@@ -25,5 +26,13 @@ namespace BlaiseAutoCompleteCases.Helpers
                 throw new ArgumentException(parameterName);
             }
         }
+
+        //public static void ThrowExceptionIfNull(this IDataRecord parameter, string parameterName)
+        //{
+        //    if (parameter == null)
+        //    {
+        //        throw new ArgumentNullException(parameterName);
+        //    }
+        //}
     }
 }

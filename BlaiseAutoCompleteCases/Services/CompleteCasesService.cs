@@ -11,15 +11,17 @@ namespace BlaiseAutoCompleteCases.Services
         private readonly ILog _logger;
         private readonly IBlaiseApi _blaiseApi;
         private readonly ICompleteCaseService _completeCaseService;
+        private readonly IDataService _iDataService;
 
         public CompleteCasesService(
             ILog logger, 
             IBlaiseApi blaiseApi, 
-            ICompleteCaseService completeCaseService)
+            ICompleteCaseService completeCaseService, IDataService iDataService)
         {
             _logger = logger;
             _blaiseApi = blaiseApi;
             _completeCaseService = completeCaseService;
+            _iDataService = iDataService;
         }
 
         public void CompleteCases(string surveyName, int numberOfCasesToComplete)
@@ -37,9 +39,11 @@ namespace BlaiseAutoCompleteCases.Services
                 {
                     if (numberOfCasesToComplete == caseCompletedCounter) break;
 
+                    var dataRecord = dataSet.ActiveRecord;
                     if (!_blaiseApi.CaseHasBeenCompleted(dataSet.ActiveRecord))
                     {
-                        _completeCaseService.CompleteCase(dataSet.ActiveRecord, survey.Name, survey.ServerPark);
+                        _iDataService.GetDataAndUpdate(dataRecord, survey.Name, survey.ServerPark);
+                        _completeCaseService.CompleteCase(dataRecord, survey.Name, survey.ServerPark);
                         caseCompletedCounter++;
                     }
                     dataSet.MoveNext();

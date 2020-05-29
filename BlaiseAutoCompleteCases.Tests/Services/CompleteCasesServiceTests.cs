@@ -20,6 +20,7 @@ namespace BlaiseAutoCompleteCases.Tests.Services
         private Mock<IBlaiseApi> _blaiseApiMock;
         private Mock<IDataSet> _dataSetMock;
         private Mock<ICompleteCaseService> _completeCaseServiceMock;
+        private Mock<IDataService> _idataServiceMock;
         private readonly List<ISurvey> _surveys;
         private readonly string _instrumentName;
         private readonly string _serverParkName;
@@ -33,11 +34,6 @@ namespace BlaiseAutoCompleteCases.Tests.Services
             var survey1Mock = new Mock<ISurvey>();
             survey1Mock.Setup(a => a.Name).Returns(_instrumentName);
             survey1Mock.Setup(a => a.ServerPark).Returns(_serverParkName);
-
-            //var survey2Mock = new Mock<ISurvey>();
-            //survey2Mock.Setup(a => a.Name).Returns(_surveyName);
-            //survey2Mock.Setup(a => a.ServerPark).Returns(_serverParkName);
-
             _surveys = new List<ISurvey> { survey1Mock.Object};
         }
 
@@ -48,8 +44,8 @@ namespace BlaiseAutoCompleteCases.Tests.Services
             _blaiseApiMock = new Mock<IBlaiseApi>();
             _dataSetMock = new Mock<IDataSet>();
             _completeCaseServiceMock = new Mock<ICompleteCaseService>();
-            _sut = new CompleteCasesService(_loggingMock.Object, _blaiseApiMock.Object, _completeCaseServiceMock.Object);
-
+            _idataServiceMock = new Mock<IDataService>();
+            _sut = new CompleteCasesService(_loggingMock.Object, _blaiseApiMock.Object, _completeCaseServiceMock.Object, _idataServiceMock.Object);
         }
 
         [Test]

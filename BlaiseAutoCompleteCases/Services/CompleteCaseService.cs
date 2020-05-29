@@ -20,7 +20,7 @@ namespace BlaiseAutoCompleteCases.Services
 
         public void CompleteCase(IDataRecord dataRecord, string instrumentName, string serverParkName)
         {
-            _logger.Info($"Marking case as complete, Instrument Name: {instrumentName}, ServeParkName: {serverParkName}");
+            _logger.Info($"Setting case as complete, Instrument Name: {instrumentName}, ServeParkName: {serverParkName}");
 
             instrumentName.ThrowExceptionIfNullOrEmpty("instrumentName");
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");

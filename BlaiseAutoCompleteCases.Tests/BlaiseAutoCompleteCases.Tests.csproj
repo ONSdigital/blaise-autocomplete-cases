@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Blaise.Nuget.Api.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Blaise.Nuget.Api.Contracts.2020.5.27.4\lib\net472\Blaise.Nuget.Api.Contracts.dll</HintPath>
+      <HintPath>..\packages\Blaise.Nuget.Api.Contracts.2020.5.28.1\lib\net472\Blaise.Nuget.Api.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Blaise.Nuget.PubSub.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Blaise.Nuget.PubSub.2020.5.19.2\lib\net472\Blaise.Nuget.PubSub.Api.dll</HintPath>
@@ -184,7 +184,7 @@
     <Compile Include="Mappers\CompletionModelMapperTests.cs" />
     <Compile Include="MessageHandler\CaseCompletionHandlerTests.cs" />
     <Compile Include="Providers\ConfigurationProviderTests.cs" />
-    <Compile Include="Services\CaseCompletionHandlerTests.cs" />
+    <Compile Include="Services\DataServiceTests.cs" />
     <Compile Include="Services\CompleteCasesServiceTests.cs" />
     <Compile Include="Services\InitialiseServiceTests.cs" />
     <Compile Include="Services\QueueServiceTests.cs" />

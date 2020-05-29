@@ -6,10 +6,12 @@ using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.PubSub.Api;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
 using BlaiseAutoCompleteCases.Interfaces.Mappers;
+using BlaiseAutoCompleteCases.Interfaces.PersonData;
 using BlaiseAutoCompleteCases.Interfaces.Providers;
 using BlaiseAutoCompleteCases.Interfaces.Services;
 using BlaiseAutoCompleteCases.Mappers;
 using BlaiseAutoCompleteCases.MessageHandler;
+using BlaiseAutoCompleteCases.PersonData;
 using BlaiseAutoCompleteCases.Providers;
 using BlaiseAutoCompleteCases.Services;
 using log4net;
@@ -40,6 +42,9 @@ namespace BlaiseAutoCompleteCases
             unityContainer.RegisterType<IConfigurationProvider, ConfigurationProvider>();
             var configurationProvider = unityContainer.Resolve<IConfigurationProvider>();
 
+            //person data
+            unityContainer.RegisterType<IPersonOutcome, PersonOutcome>();
+
             unityContainer.RegisterSingleton<IFluentQueueApi, FluentQueueApi>();
             unityContainer.RegisterFactory<ILog>(f => LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType));
 
@@ -52,6 +57,7 @@ namespace BlaiseAutoCompleteCases
             //services   
             unityContainer.RegisterType<ICompleteCaseService, CompleteCaseService>();
             unityContainer.RegisterType<ICompleteCasesService, CompleteCasesService>();
+            unityContainer.RegisterType<IDataService, DataService>();
 
             //queue service
             unityContainer.RegisterType<IQueueService, QueueService>(new InjectionConstructor(configurationProvider, unityContainer.Resolve<IFluentQueueApi>()));
