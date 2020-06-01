@@ -5,22 +5,22 @@ using Blaise.Nuget.Api;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.PubSub.Api;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Mappers;
-using BlaiseAutoCompleteCases.Interfaces.PersonData;
-using BlaiseAutoCompleteCases.Interfaces.Providers;
-using BlaiseAutoCompleteCases.Interfaces.Services;
-using BlaiseAutoCompleteCases.Mappers;
-using BlaiseAutoCompleteCases.MessageHandler;
-using BlaiseAutoCompleteCases.PersonData;
-using BlaiseAutoCompleteCases.Providers;
-using BlaiseAutoCompleteCases.Services;
+using BlaiseCaseAutoComplete.Interfaces.Mappers;
+using BlaiseCaseAutoComplete.Interfaces.PersonData;
+using BlaiseCaseAutoComplete.Interfaces.Providers;
+using BlaiseCaseAutoComplete.Interfaces.Services;
+using BlaiseCaseAutoComplete.Mappers;
+using BlaiseCaseAutoComplete.MessageHandler;
+using BlaiseCaseAutoComplete.PersonData;
+using BlaiseCaseAutoComplete.Providers;
+using BlaiseCaseAutoComplete.Services;
 using log4net;
 using Unity;
 using Unity.Injection;
 
-namespace BlaiseAutoCompleteCases
+namespace BlaiseCaseAutoComplete
 {
-    public partial class BlaiseAutoCompleteCases : ServiceBase
+    public partial class BlaiseCaseAutoComplete : ServiceBase
     {
         #region Variables
 
@@ -33,7 +33,7 @@ namespace BlaiseAutoCompleteCases
         /// <summary>
         /// Class constructor for initializing the service.
         /// </summary>    
-        public BlaiseAutoCompleteCases()
+        public BlaiseCaseAutoComplete()
         {
             InitializeComponent();
             IUnityContainer unityContainer = new UnityContainer();

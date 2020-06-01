@@ -1,7 +1,6 @@
 ﻿using System;
-using StatNeth.Blaise.Data.DataStructure;
 
-namespace BlaiseAutoCompleteCases.Helpers
+namespace BlaiseCaseAutoComplete.Helpers
 {
     internal static class ParameterValidationHelper
     {

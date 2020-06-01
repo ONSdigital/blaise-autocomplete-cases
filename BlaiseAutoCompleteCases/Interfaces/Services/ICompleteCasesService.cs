@@ -1,4 +1,4 @@
-﻿namespace BlaiseAutoCompleteCases.Interfaces.Services
+﻿namespace BlaiseCaseAutoComplete.Interfaces.Services
 {
     public interface ICompleteCasesService
     {

@@ -1,10 +1,10 @@
-﻿using Blaise.Nuget.Api.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Helpers;
-using BlaiseAutoCompleteCases.Interfaces.Services;
+﻿using System.Linq;
+using Blaise.Nuget.Api.Contracts.Interfaces;
+using BlaiseCaseAutoComplete.Helpers;
+using BlaiseCaseAutoComplete.Interfaces.Services;
 using log4net;
-using System.Linq;
 
-namespace BlaiseAutoCompleteCases.Services
+namespace BlaiseCaseAutoComplete.Services
 {
     public class CompleteCasesService : ICompleteCasesService
     {

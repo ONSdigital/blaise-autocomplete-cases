@@ -1,4 +1,4 @@
-﻿namespace BlaiseAutoCompleteCases.Interfaces.Providers
+﻿namespace BlaiseCaseAutoComplete.Interfaces.Providers
 {
     public interface IConfigurationProvider
     {

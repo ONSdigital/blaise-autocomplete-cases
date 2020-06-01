@@ -1,10 +1,10 @@
 ﻿using Blaise.Nuget.PubSub.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Providers;
-using BlaiseAutoCompleteCases.Services;
+using BlaiseCaseAutoComplete.Interfaces.Providers;
+using BlaiseCaseAutoComplete.Services;
 using Moq;
 using NUnit.Framework;
 
-namespace BlaiseAutoCompleteCases.Tests.Services
+namespace BlaiseCaseAutoComplete.Tests.Services
 {
     public class QueueServiceTests
     {

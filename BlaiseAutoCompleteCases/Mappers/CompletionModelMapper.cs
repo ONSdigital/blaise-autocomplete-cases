@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using BlaiseAutoCompleteCases.Interfaces.Mappers;
-using BlaiseAutoCompleteCases.Models;
+using BlaiseCaseAutoComplete.Interfaces.Mappers;
+using BlaiseCaseAutoComplete.Models;
 using Newtonsoft.Json;
 
-namespace BlaiseAutoCompleteCases.Mappers
+namespace BlaiseCaseAutoComplete.Mappers
 {
     public class CompletionModelMapper : ICompletionModelMapper
     {

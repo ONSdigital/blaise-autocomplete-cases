@@ -1,10 +1,10 @@
 ﻿using System;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Mappers;
-using BlaiseAutoCompleteCases.Interfaces.Services;
+using BlaiseCaseAutoComplete.Interfaces.Mappers;
+using BlaiseCaseAutoComplete.Interfaces.Services;
 using log4net;
 
-namespace BlaiseAutoCompleteCases.MessageHandler
+namespace BlaiseCaseAutoComplete.MessageHandler
 {
     public class CaseCompletionHandler : IMessageHandler
     {

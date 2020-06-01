@@ -1,7 +1,7 @@
-﻿using BlaiseAutoCompleteCases.Interfaces.Providers;
-using System.Configuration;
+﻿using System.Configuration;
+using BlaiseCaseAutoComplete.Interfaces.Providers;
 
-namespace BlaiseAutoCompleteCases.Providers
+namespace BlaiseCaseAutoComplete.Providers
 {
     public class ConfigurationProvider : IConfigurationProvider
     {

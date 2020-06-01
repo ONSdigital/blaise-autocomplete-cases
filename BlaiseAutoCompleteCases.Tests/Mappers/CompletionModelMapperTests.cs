@@ -1,9 +1,9 @@
-﻿using BlaiseAutoCompleteCases.Mappers;
-using BlaiseAutoCompleteCases.Models;
+﻿using BlaiseCaseAutoComplete.Mappers;
+using BlaiseCaseAutoComplete.Models;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace BlaiseAutoCompleteCases.Tests.Mappers
+namespace BlaiseCaseAutoComplete.Tests.Mappers
 {
     public class CompletionModelMapperTests
     {

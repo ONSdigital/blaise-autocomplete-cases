@@ -1,7 +1,7 @@
-﻿using BlaiseAutoCompleteCases.Providers;
+﻿using BlaiseCaseAutoComplete.Providers;
 using NUnit.Framework;
 
-namespace BlaiseAutoCompleteCases.Tests.Providers
+namespace BlaiseCaseAutoComplete.Tests.Providers
 {
     public class ConfigurationProviderTests
     {

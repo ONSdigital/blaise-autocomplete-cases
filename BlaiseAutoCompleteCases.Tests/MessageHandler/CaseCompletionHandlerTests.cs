@@ -1,14 +1,14 @@
 ﻿using System;
 using Blaise.Nuget.Api.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Mappers;
-using BlaiseAutoCompleteCases.Interfaces.Services;
-using BlaiseAutoCompleteCases.MessageHandler;
-using BlaiseAutoCompleteCases.Models;
+using BlaiseCaseAutoComplete.Interfaces.Mappers;
+using BlaiseCaseAutoComplete.Interfaces.Services;
+using BlaiseCaseAutoComplete.MessageHandler;
+using BlaiseCaseAutoComplete.Models;
 using log4net;
 using Moq;
 using NUnit.Framework;
 
-namespace BlaiseAutoCompleteCases.Tests.MessageHandler
+namespace BlaiseCaseAutoComplete.Tests.MessageHandler
 {
     public class CaseCompletionHandlerTests
     {

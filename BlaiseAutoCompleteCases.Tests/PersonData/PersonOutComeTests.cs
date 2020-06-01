@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using BlaiseAutoCompleteCases.Interfaces.PersonData;
-using BlaiseAutoCompleteCases.PersonData;
+﻿using System.Collections.Generic;
+using BlaiseCaseAutoComplete.Interfaces.PersonData;
+using BlaiseCaseAutoComplete.PersonData;
 using Moq;
 using NUnit.Framework;
 
-namespace BlaiseAutoCompleteCases.Tests.PersonData
+namespace BlaiseCaseAutoComplete.Tests.PersonData
 {
     public class PersonOutComeTests
     {

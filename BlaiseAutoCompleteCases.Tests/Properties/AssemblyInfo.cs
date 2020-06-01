@@ -1,11 +1,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("BlaiseAutoCompleteCases.Tests")]
+[assembly: AssemblyTitle("BlaiseCaseAutoComplete.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BlaiseAutoCompleteCases.Tests")]
+[assembly: AssemblyProduct("BlaiseCaseAutoComplete.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,6 +1,6 @@
-﻿using BlaiseAutoCompleteCases.Models;
+﻿using BlaiseCaseAutoComplete.Models;
 
-namespace BlaiseAutoCompleteCases.Interfaces.Mappers
+namespace BlaiseCaseAutoComplete.Interfaces.Mappers
 {
     public interface ICompletionModelMapper
     {

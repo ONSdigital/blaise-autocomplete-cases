@@ -1,12 +1,12 @@
-﻿using Blaise.Nuget.PubSub.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Services;
-using BlaiseAutoCompleteCases.Services;
+﻿using System;
+using Blaise.Nuget.PubSub.Contracts.Interfaces;
+using BlaiseCaseAutoComplete.Interfaces.Services;
+using BlaiseCaseAutoComplete.Services;
 using log4net;
 using Moq;
 using NUnit.Framework;
-using System;
 
-namespace BlaiseAutoCompleteCases.Tests.Services
+namespace BlaiseCaseAutoComplete.Tests.Services
 {
     public class InitialiseServiceTests
     {

@@ -1,8 +1,8 @@
 ﻿using Blaise.Nuget.PubSub.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Providers;
-using BlaiseAutoCompleteCases.Interfaces.Services;
+using BlaiseCaseAutoComplete.Interfaces.Providers;
+using BlaiseCaseAutoComplete.Interfaces.Services;
 
-namespace BlaiseAutoCompleteCases.Services
+namespace BlaiseCaseAutoComplete.Services
 {
     public class QueueService : IQueueService
     {

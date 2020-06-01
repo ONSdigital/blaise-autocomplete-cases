@@ -1,9 +1,9 @@
-﻿using Blaise.Nuget.PubSub.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Interfaces.Services;
+﻿using System;
+using Blaise.Nuget.PubSub.Contracts.Interfaces;
+using BlaiseCaseAutoComplete.Interfaces.Services;
 using log4net;
-using System;
 
-namespace BlaiseAutoCompleteCases.Services
+namespace BlaiseCaseAutoComplete.Services
 {
     public class InitialiseService : IInitialiseService
     {

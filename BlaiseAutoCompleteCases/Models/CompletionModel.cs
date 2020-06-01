@@ -1,4 +1,4 @@
-﻿namespace BlaiseAutoCompleteCases.Models
+﻿namespace BlaiseCaseAutoComplete.Models
 {
     public class CompletionModel
     {

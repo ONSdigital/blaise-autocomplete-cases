@@ -1,7 +1,7 @@
-﻿using BlaiseAutoCompleteCases.Interfaces.PersonData;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using BlaiseCaseAutoComplete.Interfaces.PersonData;
 
-namespace BlaiseAutoCompleteCases.PersonData
+namespace BlaiseCaseAutoComplete.PersonData
 {
     public class PersonOutcome : IPersonOutcome
     {

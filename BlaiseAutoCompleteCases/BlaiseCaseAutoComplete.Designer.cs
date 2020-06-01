@@ -1,6 +1,6 @@
-﻿namespace BlaiseAutoCompleteCases
+﻿namespace BlaiseCaseAutoComplete
 {
-    partial class BlaiseAutoCompleteCases
+    partial class BlaiseCaseAutoComplete
     {
         /// <summary> 
         /// Required designer variable.

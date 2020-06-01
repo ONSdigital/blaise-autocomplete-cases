@@ -1,6 +1,6 @@
 ﻿using StatNeth.Blaise.API.DataRecord;
 
-namespace BlaiseAutoCompleteCases.Interfaces.Services
+namespace BlaiseCaseAutoComplete.Interfaces.Services
 {
     public interface ICompleteCaseService
     {

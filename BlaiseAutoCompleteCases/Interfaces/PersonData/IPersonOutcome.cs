@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BlaiseAutoCompleteCases.Interfaces.PersonData
+namespace BlaiseCaseAutoComplete.Interfaces.PersonData
 {
     public interface IPersonOutcome
     {

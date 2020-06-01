@@ -1,15 +1,15 @@
-﻿using Blaise.Nuget.Api.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Services;
+﻿using System;
+using System.Collections.Generic;
+using Blaise.Nuget.Api.Contracts.Interfaces;
+using BlaiseCaseAutoComplete.Interfaces.PersonData;
+using BlaiseCaseAutoComplete.Services;
 using log4net;
 using Moq;
 using NUnit.Framework;
-using StatNeth.Blaise.API.ServerManager;
-using System;
-using System.Collections.Generic;
-using BlaiseAutoCompleteCases.Interfaces.PersonData;
 using StatNeth.Blaise.API.DataRecord;
+using StatNeth.Blaise.API.ServerManager;
 
-namespace BlaiseAutoCompleteCases.Tests.Services
+namespace BlaiseCaseAutoComplete.Tests.Services
 {
     public class CompleteCaseServiceTests
     {

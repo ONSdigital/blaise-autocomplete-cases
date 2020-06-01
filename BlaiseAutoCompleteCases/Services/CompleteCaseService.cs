@@ -1,12 +1,11 @@
 ﻿using Blaise.Nuget.Api.Contracts.Interfaces;
-using BlaiseAutoCompleteCases.Helpers;
-using BlaiseAutoCompleteCases.Interfaces.PersonData;
-using BlaiseAutoCompleteCases.Interfaces.Services;
+using BlaiseCaseAutoComplete.Helpers;
+using BlaiseCaseAutoComplete.Interfaces.PersonData;
+using BlaiseCaseAutoComplete.Interfaces.Services;
 using log4net;
 using StatNeth.Blaise.API.DataRecord;
 
-
-namespace BlaiseAutoCompleteCases.Services
+namespace BlaiseCaseAutoComplete.Services
 {
     public class CompleteCaseService : ICompleteCaseService
     {
