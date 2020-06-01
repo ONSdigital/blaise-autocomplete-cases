@@ -183,8 +183,8 @@
   <ItemGroup>
     <Compile Include="Mappers\CompletionModelMapperTests.cs" />
     <Compile Include="MessageHandler\CaseCompletionHandlerTests.cs" />
+    <Compile Include="PersonData\PersonOutComeTests.cs" />
     <Compile Include="Providers\ConfigurationProviderTests.cs" />
-    <Compile Include="Services\DataServiceTests.cs" />
     <Compile Include="Services\CompleteCasesServiceTests.cs" />
     <Compile Include="Services\InitialiseServiceTests.cs" />
     <Compile Include="Services\QueueServiceTests.cs" />

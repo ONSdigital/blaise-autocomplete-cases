@@ -57,7 +57,6 @@ namespace BlaiseAutoCompleteCases
             //services   
             unityContainer.RegisterType<ICompleteCaseService, CompleteCaseService>();
             unityContainer.RegisterType<ICompleteCasesService, CompleteCasesService>();
-            unityContainer.RegisterType<IDataService, DataService>();
 
             //queue service
             unityContainer.RegisterType<IQueueService, QueueService>(new InjectionConstructor(configurationProvider, unityContainer.Resolve<IFluentQueueApi>()));

@@ -193,7 +193,6 @@
     <Compile Include="Interfaces\Mappers\ICompletionModelMapper.cs" />
     <Compile Include="Interfaces\PersonData\IPersonOutcome.cs" />
     <Compile Include="Interfaces\Providers\IConfigurationProvider.cs" />
-    <Compile Include="Interfaces\Services\IDataService.cs" />
     <Compile Include="Mappers\CompletionModelMapper.cs" />
     <Compile Include="Models\CompletionModel.cs" />
     <Compile Include="PersonData\PersonOutcome.cs" />
@@ -213,7 +212,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Services\ICompleteCaseService.cs" />
-    <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\InitialiseService.cs" />
     <Compile Include="Services\QueueService.cs" />
   </ItemGroup>

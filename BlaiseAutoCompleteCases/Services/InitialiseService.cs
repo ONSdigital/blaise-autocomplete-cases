@@ -28,7 +28,7 @@ namespace BlaiseAutoCompleteCases.Services
                 _logger.Info("Subscribing to topic");
                 _queueService.Subscribe(_messageHandler);
 
-                //System.Threading;Thread.Sleep(1200000);
+                //System.Threading.Thread.Sleep(1200000);
 
                 _logger.Info("Subscription setup");
             }
