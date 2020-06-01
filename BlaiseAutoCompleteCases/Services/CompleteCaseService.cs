@@ -27,7 +27,7 @@ namespace BlaiseAutoCompleteCases.Services
 
             instrumentName.ThrowExceptionIfNullOrEmpty("instrumentName");
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
-            _blaiseApi.UpdateDataRecord(dataRecord, _personOutCome.getPersonOutcomeData(), instrumentName, serverParkName);
+            _blaiseApi.UpdateDataRecord(dataRecord, _personOutCome.GetPersonOutcomeData_Good(), instrumentName, serverParkName);
             _blaiseApi.MarkCaseAsComplete(dataRecord, instrumentName, serverParkName);
         }
     }

@@ -4,6 +4,6 @@ namespace BlaiseAutoCompleteCases.Interfaces.PersonData
 {
     public interface IPersonOutcome
     {
-        Dictionary<string, string> getPersonOutcomeData();
+        Dictionary<string, string> GetPersonOutcomeData_Good();
     }
 }

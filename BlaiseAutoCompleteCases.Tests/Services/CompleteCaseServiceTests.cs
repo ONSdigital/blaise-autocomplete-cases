@@ -84,7 +84,7 @@ namespace BlaiseAutoCompleteCases.Tests.Services
         {
             //Arrange
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            _personOutcomeMock.Setup(a => a.getPersonOutcomeData()).Returns(dictionary);
+            _personOutcomeMock.Setup(a => a.GetPersonOutcomeData_Good()).Returns(dictionary);
 
             //Act
             _sut.CompleteCase(It.IsAny<IDataRecord>(), _instrumentName, _serverParkName);
