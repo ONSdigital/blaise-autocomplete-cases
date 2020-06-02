@@ -23,7 +23,7 @@ E.g.            {"QID.HHold", "1"},
                 {"QHousehold.QHHold.Person[1].DVAge", "40"}
 
 
-#Local debug:
+# Local debug:
 
 To run the service locally please uncomment this line "System.Threading.Thread.Sleep(1200000)" in the InitialiseService.cs in the BlaiseCaseAutoComplete project.  This ensure that there is a delay after the GCP subscription is set up - allowing time for a message to be put onthe topic.  
 
