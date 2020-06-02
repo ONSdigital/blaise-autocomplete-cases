@@ -196,7 +196,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlaiseAutoCompleteCases\BlaiseCaseAutoComplete.csproj">
+    <ProjectReference Include="..\BlaiseCaseAutoComplete\BlaiseCaseAutoComplete.csproj">
       <Project>{c77a28b7-ad43-48a7-a438-d9d28d092f5e}</Project>
       <Name>BlaiseCaseAutoComplete</Name>
     </ProjectReference>

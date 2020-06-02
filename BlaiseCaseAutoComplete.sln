@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaiseCaseAutoComplete", "BlaiseAutoCompleteCases\BlaiseCaseAutoComplete.csproj", "{C77A28B7-AD43-48A7-A438-D9D28D092F5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaiseCaseAutoComplete", "BlaiseCaseAutoComplete\BlaiseCaseAutoComplete.csproj", "{C77A28B7-AD43-48A7-A438-D9D28D092F5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaiseCaseAutoComplete.Tests", "BlaiseAutoCompleteCases.Tests\BlaiseCaseAutoComplete.Tests.csproj", "{330117B8-1A5E-4279-8727-F25AFA6FCBC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaiseCaseAutoComplete.Tests", "BlaiseCaseAutoComplete.Tests\BlaiseCaseAutoComplete.Tests.csproj", "{330117B8-1A5E-4279-8727-F25AFA6FCBC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
