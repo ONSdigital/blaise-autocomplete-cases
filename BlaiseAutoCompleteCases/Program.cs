@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.ServiceProcess;
+using log4net;
 
 namespace BlaiseCaseAutoComplete
 {
@@ -16,12 +17,11 @@ namespace BlaiseCaseAutoComplete
             // Call the service class if run in debug mode so no need to install service for testing.
 #if DEBUG
             Log.Info("Blaise Auto Complete Cases service starting in DEBUG mode");
-            BlaiseCaseAutoComplete BlaiseCaseAutoComplete = new BlaiseCaseAutoComplete();
-            BlaiseCaseAutoComplete.OnDebug();
+            BlaiseCaseAutoComplete blaiseCaseAutoComplete = new BlaiseCaseAutoComplete();
+            blaiseCaseAutoComplete.OnDebug();
 
 #else
             Log.Info("Blaise Case Creator service starting in RELEASE mode.");
-            ServiceBase[] ServicesToRun;
             var servicesToRun = new ServiceBase[]
             {
                 new BlaiseCaseAutoComplete()
