@@ -22,12 +22,14 @@ namespace BlaiseCaseAutoComplete.Services
 
         public void CompleteCase(IDataRecord dataRecord, string instrumentName, string serverParkName)
         {
-            _logger.Info($"Setting case as complete, Instrument Name: {instrumentName}, ServeParkName: {serverParkName}");
-
             instrumentName.ThrowExceptionIfNullOrEmpty("instrumentName");
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
+
             _blaiseApi.UpdateDataRecord(dataRecord, _personOutCome.GetPersonOutcomeData_Good(), instrumentName, serverParkName);
             _blaiseApi.MarkCaseAsComplete(dataRecord, instrumentName, serverParkName);
+            
+            _logger.Info(
+                $"Case: {dataRecord.Keys[0].KeyValue} marked as complete, Instrument Name: {instrumentName}, ServeParkName: {serverParkName}");
         }
     }
 }
