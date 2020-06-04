@@ -40,7 +40,6 @@ namespace BlaiseCaseAutoComplete
 
             //providers
             unityContainer.RegisterType<IConfigurationProvider, ConfigurationProvider>();
-            var configurationProvider = unityContainer.Resolve<IConfigurationProvider>();
 
             //person data
             unityContainer.RegisterType<IPersonOutcome, PersonOutcome>();
@@ -59,7 +58,7 @@ namespace BlaiseCaseAutoComplete
             unityContainer.RegisterType<ICompleteCasesService, CompleteCasesService>();
 
             //queue service
-            unityContainer.RegisterType<IQueueService, QueueService>(new InjectionConstructor(configurationProvider, unityContainer.Resolve<IFluentQueueApi>()));
+            unityContainer.RegisterType<IQueueService, QueueService>();
 
             //blaise services
             unityContainer.RegisterType<IBlaiseApi, BlaiseApi>();
