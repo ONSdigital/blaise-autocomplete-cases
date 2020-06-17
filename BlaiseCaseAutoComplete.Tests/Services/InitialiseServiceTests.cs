@@ -1,4 +1,5 @@
 ﻿using System;
+using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Interfaces.Services;
 using BlaiseCaseAutoComplete.Services;
@@ -13,6 +14,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<ILog> _loggingMock;
         private Mock<IQueueService> _queueServiceMock;
         private Mock<IMessageHandler> _messageHandlerMock;
+        private Mock<IBlaiseApi> _blaiseApiMock;
 
         private InitialiseService _sut;
 
@@ -22,11 +24,13 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _loggingMock = new Mock<ILog>();
             _queueServiceMock = new Mock<IQueueService>();
             _messageHandlerMock = new Mock<IMessageHandler>();
+            _blaiseApiMock = new Mock<IBlaiseApi>();
 
             _sut = new InitialiseService(
                 _loggingMock.Object,
                 _queueServiceMock.Object,
-                _messageHandlerMock.Object);
+                _messageHandlerMock.Object,
+                _blaiseApiMock.Object);
         }
 
         [Test]

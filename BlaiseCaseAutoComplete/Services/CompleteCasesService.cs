@@ -26,11 +26,14 @@ namespace BlaiseCaseAutoComplete.Services
         {
             surveyName.ThrowExceptionIfNullOrEmpty("surveyName");
             numberOfCasesToComplete.ThrowExceptionIfLessThanOrEqualToZero("numberOfCasesToComplete");
-            int caseCompletedCounter = 0;
+            var caseCompletedCounter = 0;
             var surveys = _blaiseApi.GetAllSurveys().ToList();
+
+            _logger.Info($"Found '{surveys.Count}' surveys");
 
             foreach (var survey in surveys)
             {
+                _logger.Info($"Getting cases for survey '{survey.Name}' on server park '{survey.ServerPark}'");
                 var dataSet = _blaiseApi.GetDataSet(survey.Name, survey.ServerPark);
 
                 while (!dataSet.EndOfSet)

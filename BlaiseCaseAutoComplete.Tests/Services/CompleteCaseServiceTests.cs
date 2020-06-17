@@ -72,8 +72,12 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         [Test]
         public void Given_A_Case_When_I_Call_CompleteCase_Then_A_Call_To_MarkCaseAsComplete_Is_Made()
         {
+            //arrange
+            var dataRecord = new Mock<IDataRecord>();
+            dataRecord.Setup(d => d.Keys[0].KeyValue).Returns("");
+
             //Act
-            _sut.CompleteCase(It.IsAny<IDataRecord>(), _instrumentName, _serverParkName);
+            _sut.CompleteCase(dataRecord.Object, _instrumentName, _serverParkName);
 
             //assert
             _blaiseApiMock.Verify(v => v.MarkCaseAsComplete(It.IsAny<IDataRecord>(), _instrumentName, _serverParkName), Times.Once);
@@ -83,11 +87,14 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         public void Given_A_Case_When_I_Call_CompleteCase_Then_A_Call_To_UpdateDataRecord_Is_Made()
         {
             //Arrange
+            var dataRecord = new Mock<IDataRecord>();
+            dataRecord.Setup(d => d.Keys[0].KeyValue).Returns("");
+
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
             _personOutcomeMock.Setup(a => a.GetPersonOutcomeData_Good()).Returns(dictionary);
 
             //Act
-            _sut.CompleteCase(It.IsAny<IDataRecord>(), _instrumentName, _serverParkName);
+            _sut.CompleteCase(dataRecord.Object, _instrumentName, _serverParkName);
 
             //assert
             _blaiseApiMock.Verify(v => v.UpdateDataRecord(It.IsAny<IDataRecord>(), dictionary, _instrumentName, _serverParkName), Times.Once);
