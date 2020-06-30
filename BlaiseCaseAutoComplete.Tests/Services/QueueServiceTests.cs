@@ -46,17 +46,17 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         public void Given_I_Call_Subscribe_Then_The_Correct_Call_Is_Made_And_Subscribes_To_The_Appropriate_Queues()
         {
             //arrange
-            _queueProviderMock.Setup(q => q.ForProject(It.IsAny<string>())).Returns(_queueProviderMock.Object);
-            _queueProviderMock.Setup(q => q.ForSubscription(It.IsAny<string>())).Returns(_queueProviderMock.Object);
-            _queueProviderMock.Setup(q => q.StartConsuming(It.IsAny<IMessageHandler>()));
+            _queueProviderMock.Setup(q => q.WithProject(It.IsAny<string>())).Returns(_queueProviderMock.Object);
+            _queueProviderMock.Setup(q => q.WithSubscription(It.IsAny<string>())).Returns(_queueProviderMock.Object);
+            _queueProviderMock.Setup(q => q.StartConsuming(It.IsAny<IMessageHandler>(), It.IsAny<bool>()));
 
             //act
             _sut.Subscribe(_messageHandlerMock.Object);
 
             //assert
-            _queueProviderMock.Verify(v => v.ForProject(_projectId), Times.Once);
-            _queueProviderMock.Verify(v => v.ForSubscription(_subscriptionId), Times.Once);
-            _queueProviderMock.Verify(v => v.StartConsuming(_messageHandlerMock.Object), Times.Once);
+            _queueProviderMock.Verify(v => v.WithProject(_projectId), Times.Once);
+            _queueProviderMock.Verify(v => v.WithSubscription(_subscriptionId), Times.Once);
+            _queueProviderMock.Verify(v => v.StartConsuming(_messageHandlerMock.Object, It.IsAny<bool>()), Times.Once);
         }
 
 

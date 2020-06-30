@@ -20,8 +20,8 @@ namespace BlaiseCaseAutoComplete.Services
         public void Subscribe(IMessageHandler messageHandler)
         {
             _queueProvider
-                .ForProject(_configurationProvider.ProjectId)
-                .ForSubscription(_configurationProvider.SubscriptionId)
+                .WithProject(_configurationProvider.ProjectId)
+                .WithSubscription(_configurationProvider.SubscriptionId)
                 .StartConsuming(messageHandler);
         }
 

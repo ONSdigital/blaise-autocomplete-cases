@@ -49,7 +49,7 @@ namespace BlaiseCaseAutoComplete.Services
         {
             var serverParkNames = _blaiseApi.GetServerParkNames().ToList();
 
-            _logger.Info($"Found '{serverParkNames.Count()}' server parks");
+            _logger.Info($"Found '{serverParkNames.Count}' server parks");
 
             foreach (var serverParkName in serverParkNames)
             {
