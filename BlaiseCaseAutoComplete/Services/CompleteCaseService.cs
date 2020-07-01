@@ -1,7 +1,8 @@
-﻿using Blaise.Nuget.Api.Contracts.Interfaces;
+﻿using Blaise.Nuget.Api.Contracts.Enums;
+using Blaise.Nuget.Api.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Helpers;
-using BlaiseCaseAutoComplete.Interfaces.PersonData;
 using BlaiseCaseAutoComplete.Interfaces.Services;
+using BlaiseCaseAutoComplete.Models;
 using log4net;
 using StatNeth.Blaise.API.DataRecord;
 
@@ -10,26 +11,85 @@ namespace BlaiseCaseAutoComplete.Services
     public class CompleteCaseService : ICompleteCaseService
     {
         private readonly ILog _logger;
-        private readonly IBlaiseApi _blaiseApi;
-        private readonly IPersonOutcome _personOutCome;
+        private readonly IFluentBlaiseApi _blaiseApi;
 
-        public CompleteCaseService(ILog logger, IBlaiseApi blaiseApi, IPersonOutcome personOutcome)
+        public CompleteCaseService(
+            ILog logger,
+            IFluentBlaiseApi blaiseApi)
         {
             _logger = logger;
             _blaiseApi = blaiseApi;
-            _personOutCome = personOutcome;
         }
 
-        public void CompleteCase(IDataRecord dataRecord, string instrumentName, string serverParkName)
+        public void CompleteCase(AutoCompleteCaseModel model)
         {
-            instrumentName.ThrowExceptionIfNullOrEmpty("instrumentName");
-            serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
+            model.PrimaryKey.ThrowExceptionIfNullOrEmpty("PrimaryKey");
+            model.InstrumentName.ThrowExceptionIfNullOrEmpty("InstrumentName");
+            model.ServerPark.ThrowExceptionIfNullOrEmpty("ServerPark");
 
-            _blaiseApi.UpdateDataRecord(dataRecord, _personOutCome.GetPersonOutcomeData_Good(), instrumentName, serverParkName);
-            _blaiseApi.MarkCaseAsComplete(dataRecord, instrumentName, serverParkName);
-            
-            _logger.Info(
-                $"Case: {dataRecord.Keys[0].KeyValue} marked as complete, Instrument Name: {instrumentName}, ServeParkName: {serverParkName}");
+            if (!CaseExists(model))
+            {
+                _logger.Info(
+                    $"Case with primary key '{model.PrimaryKey}' was not found for survey '{model.InstrumentName}' on ServeParkName: {model.ServerPark}");
+
+                return;
+            }
+
+            var dataRecord = GetCase(model);
+            CompleteCase(dataRecord, model);
+        }
+
+        public void CompleteCase(IDataRecord dataRecord, AutoCompleteCaseModel model)
+        {
+            model.PrimaryKey.ThrowExceptionIfNullOrEmpty("PrimaryKey");
+            model.InstrumentName.ThrowExceptionIfNullOrEmpty("InstrumentName");
+            model.ServerPark.ThrowExceptionIfNullOrEmpty("ServerPark");
+
+            UpdateDataRecord(dataRecord, model);
+            MarkAsComplete(dataRecord, model);
+        }
+
+        private bool CaseExists(AutoCompleteCaseModel model)
+        {
+            return _blaiseApi
+                .WithInstrument(model.InstrumentName)
+                .WithServerPark(model.ServerPark)
+                .Case
+                .WithPrimaryKey(model.PrimaryKey)
+                .Exists;
+        }
+
+        private IDataRecord GetCase(AutoCompleteCaseModel model)
+        {
+            return _blaiseApi
+                .WithInstrument(model.InstrumentName)
+                .WithServerPark(model.ServerPark)
+                .Case
+                .WithPrimaryKey(model.PrimaryKey)
+                .Get();
+        }
+
+        private void UpdateDataRecord(IDataRecord dataRecord, AutoCompleteCaseModel model)
+        {
+            _blaiseApi
+                .WithInstrument(model.InstrumentName)
+                .WithServerPark(model.ServerPark)
+                .Case
+                .WithDataRecord(dataRecord)
+                .WithData(model.Payload)
+                .Update();
+
+        }
+
+        private void MarkAsComplete(IDataRecord dataRecord, AutoCompleteCaseModel model)
+        {
+            _blaiseApi
+                .WithInstrument(model.InstrumentName)
+                .WithServerPark(model.ServerPark)
+                .Case
+                .WithDataRecord(dataRecord)
+                .WithStatus(StatusType.Completed)
+                .Update();
         }
     }
 }

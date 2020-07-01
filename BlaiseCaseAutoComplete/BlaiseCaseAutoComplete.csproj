@@ -37,13 +37,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Blaise.Nuget.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Blaise.Nuget.Api.2020.6.30.1\lib\net472\Blaise.Nuget.Api.dll</HintPath>
+      <HintPath>..\packages\Blaise.Nuget.Api.2020.7.1.5\lib\net472\Blaise.Nuget.Api.dll</HintPath>
     </Reference>
     <Reference Include="Blaise.Nuget.Api.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Blaise.Nuget.Api.Contracts.2020.6.30.1\lib\net472\Blaise.Nuget.Api.Contracts.dll</HintPath>
+      <HintPath>..\packages\Blaise.Nuget.Api.Contracts.2020.7.1.5\lib\net472\Blaise.Nuget.Api.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Blaise.Nuget.Api.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Blaise.Nuget.Api.2020.6.30.1\lib\net472\Blaise.Nuget.Api.Core.dll</HintPath>
+      <HintPath>..\packages\Blaise.Nuget.Api.2020.7.1.5\lib\net472\Blaise.Nuget.Api.Core.dll</HintPath>
     </Reference>
     <Reference Include="Blaise.Nuget.PubSub.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Blaise.Nuget.PubSub.2020.6.18.3\lib\net472\Blaise.Nuget.PubSub.Api.dll</HintPath>
@@ -208,18 +208,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ParameterValidationHelper.cs" />
-    <Compile Include="Interfaces\Mappers\ICompletionModelMapper.cs" />
-    <Compile Include="Interfaces\PersonData\IPersonOutcome.cs" />
+    <Compile Include="Interfaces\Mappers\IModelMapper.cs" />
     <Compile Include="Interfaces\Providers\IConfigurationProvider.cs" />
-    <Compile Include="Mappers\CompletionModelMapper.cs" />
-    <Compile Include="Models\CompletionModel.cs" />
-    <Compile Include="PersonData\PersonOutcome.cs" />
+    <Compile Include="Mappers\ModelMapper.cs" />
+    <Compile Include="Models\AutoCompleteCaseModel.cs" />
     <Compile Include="Services\CompleteCaseService.cs" />
-    <Compile Include="Services\CompleteCasesService.cs" />
-    <Compile Include="Interfaces\Services\ICompleteCasesService.cs" />
+    <Compile Include="Services\AutoCompleteCasesService.cs" />
+    <Compile Include="Interfaces\Services\IAutoCompleteCasesService.cs" />
     <Compile Include="Interfaces\Services\IInitialiseService.cs" />
     <Compile Include="Interfaces\Services\IQueueService.cs" />
-    <Compile Include="MessageHandler\CaseCompletionHandler.cs" />
+    <Compile Include="MessageHandler\AutoCompleteCaseHandler.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="BlaiseCaseAutoComplete.cs">
       <SubType>Component</SubType>

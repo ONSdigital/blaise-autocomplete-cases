@@ -6,17 +6,14 @@ using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.PubSub.Api;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Interfaces.Mappers;
-using BlaiseCaseAutoComplete.Interfaces.PersonData;
 using BlaiseCaseAutoComplete.Interfaces.Providers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
 using BlaiseCaseAutoComplete.Mappers;
 using BlaiseCaseAutoComplete.MessageHandler;
-using BlaiseCaseAutoComplete.PersonData;
 using BlaiseCaseAutoComplete.Providers;
 using BlaiseCaseAutoComplete.Services;
 using log4net;
 using Unity;
-using Unity.Injection;
 
 namespace BlaiseCaseAutoComplete
 {
@@ -41,21 +38,18 @@ namespace BlaiseCaseAutoComplete
             //providers
             unityContainer.RegisterType<IConfigurationProvider, ConfigurationProvider>();
 
-            //person data
-            unityContainer.RegisterType<IPersonOutcome, PersonOutcome>();
-
             unityContainer.RegisterSingleton<IFluentQueueApi, FluentQueueApi>();
             unityContainer.RegisterFactory<ILog>(f => LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType));
 
             //mappers
-            unityContainer.RegisterType<ICompletionModelMapper, CompletionModelMapper>();
+            unityContainer.RegisterType<IModelMapper, ModelMapper>();
 
             //handlers
-            unityContainer.RegisterType<IMessageHandler, CaseCompletionHandler>();
+            unityContainer.RegisterType<IMessageHandler, AutoCompleteCaseHandler>();
 
             //services   
             unityContainer.RegisterType<ICompleteCaseService, CompleteCaseService>();
-            unityContainer.RegisterType<ICompleteCasesService, CompleteCasesService>();
+            unityContainer.RegisterType<IAutoCompleteCasesService, AutoCompleteCasesService>();
 
             //queue service
             unityContainer.RegisterType<IQueueService, QueueService>();
