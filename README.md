@@ -1,18 +1,13 @@
 # blaise-autocomplete-cases
 
-Windows service that will auto-complete cases in Bliase.  The records processed are random in terms of which ones are chosen in the blaise database. The number of cases that are updated is entered by specifying a number in "NumberOfCasesToComplete".  The survey in "surveyname" is the survey name that you want to update accross all server parks where this service is installed.
+Windows service that will auto-complete cases in Bliase. It can complete a specified case, or a number of random cases depending upon the message received
 
-# Triggerd by:
-    
-      Message on PubSub topic: autocomplete-cases-topic and subscription: autocomplete-cases-subscription
+For a specific case you need to specify the instrument name, the server park, and the primary key value. The number of cases property is then ignored.
 
-# PubSub Topic Message content example:
+For non specific cases, you simply need to specify the server park and the number of cases you would like to complete. The records processed are random in terms of which ones are chosen in the 
+blaise database. 
 
-      { "surveyname":"opn2004a", "NumberOfCasesToComplete":"2" }
-
-# Data
-
-  The initial version of this C# service will add data for a 'Good' outcome, along with MI data to each record specified by the above request on the pubsub Topic.
+You must specify a payload for both methods, which will represent any fields you wish to update
 
       E.g.            {"QID.HHold", "1"},
                       {"QHAdmin.HOut", "110"},
@@ -23,6 +18,33 @@ Windows service that will auto-complete cases in Bliase.  The records processed 
                       {"QHousehold.QHHold.Person[1].Sex", "1"},
                       {"QHousehold.QHHold.Person[1].tmpDoB", "1/1/1980"},
                       {"QHousehold.QHHold.Person[1].DVAge", "40"}
+
+# Triggerd by:
+    
+      Message on PubSub topic: autocomplete-cases-topic and subscription: autocomplete-cases-subscription
+
+# PubSub Topic Message content example:
+
+specific case : { 	
+	"instrument_name": "OPN2004A",
+	"server_park": "tel",
+	"primary_key": "33342",
+	"case_id": 54,
+	"NumberOfCases": 0,
+	"payload":  
+		{"QID.HHold", "1"},
+        {"QHAdmin.HOut", "110"},
+        {"QHAdmin.IntNum", "1001"},
+        {"Mode", "1"},
+        {"Processed", "2"},
+        {"QDataBag.PostCode", "XX999XX"},
+        {"QHousehold.QHHold.Person[1].Sex", "1"},
+        {"QHousehold.QHHold.Person[1].tmpDoB", "1/1/1980"},
+        {"QHousehold.QHHold.Person[1].DVAge", "40"}
+}
+
+
+non specific multiple cases : { "instrument_name":"opn2004a", "NumberOfCases":"2" }
 
 
 # Local debug:
