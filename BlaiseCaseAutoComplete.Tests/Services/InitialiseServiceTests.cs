@@ -14,7 +14,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<ILog> _loggingMock;
         private Mock<IQueueService> _queueServiceMock;
         private Mock<IMessageHandler> _messageHandlerMock;
-        private Mock<IBlaiseApi> _blaiseApiMock;
+        private Mock<IFluentBlaiseApi> _blaiseApiMock;
 
         private InitialiseService _sut;
 
@@ -24,7 +24,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _loggingMock = new Mock<ILog>();
             _queueServiceMock = new Mock<IQueueService>();
             _messageHandlerMock = new Mock<IMessageHandler>();
-            _blaiseApiMock = new Mock<IBlaiseApi>();
+            _blaiseApiMock = new Mock<IFluentBlaiseApi>();
 
             _sut = new InitialiseService(
                 _loggingMock.Object,

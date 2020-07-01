@@ -25,7 +25,8 @@ You must specify a payload for both methods, which will represent any fields you
 
 # PubSub Topic Message content example:
 
-specific case : { 	
+specific case : 
+    { 	
 	"instrument_name": "OPN2004A",
 	"server_park": "tel",
 	"primary_key": "33342",
@@ -41,10 +42,14 @@ specific case : {
         {"QHousehold.QHHold.Person[1].Sex", "1"},
         {"QHousehold.QHHold.Person[1].tmpDoB", "1/1/1980"},
         {"QHousehold.QHHold.Person[1].DVAge", "40"}
-}
+    }
 
 
-non specific multiple cases : { "instrument_name":"opn2004a", "NumberOfCases":"2" }
+non specific multiple cases : 
+    { 
+    "instrument_name":"opn2004a", 
+    "NumberOfCases":"2" 
+    }
 
 
 # Local debug:

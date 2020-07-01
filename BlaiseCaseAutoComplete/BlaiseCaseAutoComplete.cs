@@ -55,7 +55,7 @@ namespace BlaiseCaseAutoComplete
             unityContainer.RegisterType<IQueueService, QueueService>();
 
             //blaise services
-            unityContainer.RegisterType<IBlaiseApi, BlaiseApi>();
+            unityContainer.RegisterType<IFluentBlaiseApi, FluentBlaiseApi>();
 
             //main service
             unityContainer.RegisterType<IInitialiseService, InitialiseService>();

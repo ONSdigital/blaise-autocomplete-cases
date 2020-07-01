@@ -12,13 +12,13 @@ namespace BlaiseCaseAutoComplete.Services
         private readonly ILog _logger;
         private readonly IQueueService _queueService;
         private readonly IMessageHandler _messageHandler;
-        private readonly IBlaiseApi _blaiseApi;
+        private readonly IFluentBlaiseApi _blaiseApi;
 
         public InitialiseService(
             ILog logger,
             IQueueService queueService,
-            IMessageHandler messageHandler, 
-            IBlaiseApi blaiseApi)
+            IMessageHandler messageHandler,
+            IFluentBlaiseApi blaiseApi)
         {
             _logger = logger;
             _queueService = queueService;
@@ -47,7 +47,7 @@ namespace BlaiseCaseAutoComplete.Services
 
         private void LogAllServerParksOnVm()
         {
-            var serverParkNames = _blaiseApi.GetServerParkNames().ToList();
+            var serverParkNames = _blaiseApi.ServerParks.ToList();
 
             _logger.Info($"Found '{serverParkNames.Count}' server parks");
 
