@@ -9,15 +9,17 @@ blaise database.
 
 You must specify a payload for both methods, which will represent any fields you wish to update
 
-      E.g.            {"QID.HHold", "1"},
-                      {"QHAdmin.HOut", "110"},
-                      {"QHAdmin.IntNum", "1001"},
-                      {"Mode", "1"},
-                      {"Processed", "2"},
-                      {"QDataBag.PostCode", "XX999XX"},
-                      {"QHousehold.QHHold.Person[1].Sex", "1"},
-                      {"QHousehold.QHHold.Person[1].tmpDoB", "1/1/1980"},
-                      {"QHousehold.QHHold.Person[1].DVAge", "40"}
+      E.g.           
+		"QID.HHold": "1",
+        "QHAdmin.HOut": "110",
+        "QHAdmin.IntNum": "1001",
+        "Mode": "1",
+        "Processed": "2",
+        "QDataBag.PostCode": "XX999XX",
+        "QHousehold.QHHold.Person[1].Sex": "1",
+        "QHousehold.QHHold.Person[1].tmpDoB": "1/1/1980",
+        "QHousehold.QHHold.Person[1].DVAge": "40"
+	
 
 # Triggerd by:
     
@@ -26,23 +28,25 @@ You must specify a payload for both methods, which will represent any fields you
 # PubSub Topic Message content example:
 
 specific case : 
-    { 	
+{ 	
 	"instrument_name": "OPN2004A",
 	"server_park": "tel",
-	"primary_key": "33342",
-	"case_id": 54,
+	"primary_key": "66666",
+	"case_id": 666,
 	"NumberOfCases": 0,
 	"payload":  
-		{"QID.HHold", "1"},
-        {"QHAdmin.HOut", "110"},
-        {"QHAdmin.IntNum", "1001"},
-        {"Mode", "1"},
-        {"Processed", "2"},
-        {"QDataBag.PostCode", "XX999XX"},
-        {"QHousehold.QHHold.Person[1].Sex", "1"},
-        {"QHousehold.QHHold.Person[1].tmpDoB", "1/1/1980"},
-        {"QHousehold.QHHold.Person[1].DVAge", "40"}
-    }
+	{
+		"QID.HHold": "1",
+        "QHAdmin.HOut": "110",
+        "QHAdmin.IntNum": "1001",
+        "Mode": "1",
+        "Processed": "2",
+        "QDataBag.PostCode": "XX999XX",
+        "QHousehold.QHHold.Person[1].Sex": "1",
+        "QHousehold.QHHold.Person[1].tmpDoB": "1/1/1980",
+        "QHousehold.QHHold.Person[1].DVAge": "40"
+		}
+}
 
 
 non specific multiple cases : 
