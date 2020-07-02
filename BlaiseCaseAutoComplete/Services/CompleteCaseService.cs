@@ -41,7 +41,6 @@ namespace BlaiseCaseAutoComplete.Services
 
         public void CompleteCase(IDataRecord dataRecord, AutoCompleteCaseModel model)
         {
-            model.PrimaryKey.ThrowExceptionIfNullOrEmpty("PrimaryKey");
             model.InstrumentName.ThrowExceptionIfNullOrEmpty("InstrumentName");
             model.ServerPark.ThrowExceptionIfNullOrEmpty("ServerPark");
 

@@ -51,6 +51,7 @@ specific case :
 non specific multiple cases : 
     { 
     "instrument_name":"opn2004a", 
+	"server_park": "tel",
     "NumberOfCases":"2" 
     }
 

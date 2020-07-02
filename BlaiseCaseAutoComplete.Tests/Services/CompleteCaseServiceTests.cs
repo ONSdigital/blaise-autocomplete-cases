@@ -196,29 +196,6 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Verify(v => v.Case.WithDataRecord(_dataRecord.Object).WithData(_caseModel.Payload).Update(), Times.Once);
         }
 
-
-        [Test]
-        public void Given_A_Null_PrimaryKey_When_I_Call_CompleteCaseService_Then_An_ArgumentNullException_Is_Thrown()
-        {
-            //arrange
-            _caseModel.PrimaryKey = null;
-
-            //act && assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _sut.CompleteCase(It.IsAny<IDataRecord>(), _caseModel));
-            Assert.AreEqual("PrimaryKey", exception.ParamName);
-        }
-
-        [Test]
-        public void Given_An_Empty_PrimaryKey_When_I_Call_CompleteCaseService_Then_An_ArgumentNullException_Is_Thrown()
-        {
-            //arrange
-            _caseModel.PrimaryKey = string.Empty;
-
-            //act && assert
-            var exception = Assert.Throws<ArgumentException>(() => _sut.CompleteCase(It.IsAny<IDataRecord>(), _caseModel));
-            Assert.AreEqual("A value for the argument 'PrimaryKey' must be supplied", exception.Message);
-        }
-
         [Test]
         public void Given_A_Null_InstrumentName_When_I_Call_CompleteCaseService_Then_An_ArgumentNullException_Is_Thrown()
         {
