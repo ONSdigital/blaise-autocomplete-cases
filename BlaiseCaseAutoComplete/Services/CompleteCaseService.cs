@@ -37,6 +37,8 @@ namespace BlaiseCaseAutoComplete.Services
 
             var dataRecord = GetCase(model);
             CompleteCase(dataRecord, model);
+
+            _logger.Info($"Completed case with primary key '{model.PrimaryKey}'");
         }
 
         public void CompleteCase(IDataRecord dataRecord, AutoCompleteCaseModel model)

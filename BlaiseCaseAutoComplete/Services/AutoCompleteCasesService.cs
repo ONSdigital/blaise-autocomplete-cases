@@ -48,6 +48,7 @@ namespace BlaiseCaseAutoComplete.Services
                     if (!CaseIsComplete(dataSet.ActiveRecord, survey))
                     {
                         _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
+                    
                         caseCompletedCounter++;
                     }
                     dataSet.MoveNext();
