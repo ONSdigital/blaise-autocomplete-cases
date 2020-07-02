@@ -58,6 +58,10 @@ namespace BlaiseCaseAutoComplete.Services
             {
                 _logger.Info("No Cases Found to Complete");
             }
+            else
+            {
+                _logger.Info($"Completed {caseCompletedCounter} cases");
+            }
         }
 
         private IDataSet GetCases(ISurvey survey)
