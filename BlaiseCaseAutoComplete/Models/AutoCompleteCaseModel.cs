@@ -5,9 +5,6 @@ namespace BlaiseCaseAutoComplete.Models
 {
     public class AutoCompleteCaseModel
     {
-        [JsonProperty("case_id")]
-        public string CaseId { get; set; }
-
         [JsonProperty("instrument_name")]
         public string InstrumentName { get; set; }
 

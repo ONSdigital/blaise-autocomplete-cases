@@ -15,7 +15,6 @@ namespace BlaiseCaseAutoComplete.Tests.Mappers
         {
             _caseModel = new AutoCompleteCaseModel
             {
-                CaseId = "54",
                 InstrumentName = "OPN2000",
                 ServerPark = "Park1",
                 PrimaryKey = "Key1",
@@ -42,7 +41,6 @@ namespace BlaiseCaseAutoComplete.Tests.Mappers
 
             //assert
             Assert.AreEqual(_caseModel.NumberOfCases, result.NumberOfCases);
-            Assert.AreEqual(_caseModel.CaseId, result.CaseId);
             Assert.AreEqual(_caseModel.InstrumentName, result.InstrumentName);
             Assert.AreEqual(_caseModel.ServerPark, result.ServerPark);
             Assert.AreEqual(_caseModel.Payload, result.Payload);
@@ -63,7 +61,6 @@ namespace BlaiseCaseAutoComplete.Tests.Mappers
 
             //assert
             Assert.AreEqual(_caseModel.NumberOfCases, result.NumberOfCases);
-            Assert.AreEqual(_caseModel.CaseId, result.CaseId);
             Assert.AreEqual(_caseModel.InstrumentName, result.InstrumentName);
             Assert.AreEqual(_caseModel.ServerPark, result.ServerPark);
             Assert.AreEqual(_caseModel.Payload, result.Payload);

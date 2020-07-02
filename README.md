@@ -31,8 +31,7 @@ specific case :
 { 	
 	"instrument_name": "OPN2004A",
 	"server_park": "tel",
-	"primary_key": "66666",
-	"case_id": 666,
+	"primary_key": "9000001",
 	"NumberOfCases": 0,
 	"payload":  
 	{

@@ -37,7 +37,6 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         {
             _caseModel = new AutoCompleteCaseModel
             {
-                CaseId = "54",
                 InstrumentName = _instrumentName,
                 ServerPark = _serverParkName,
                 PrimaryKey = "Key1",
