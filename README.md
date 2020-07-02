@@ -53,6 +53,18 @@ non specific multiple cases :
     "instrument_name":"opn2004a", 
 	"server_park": "tel",
     "NumberOfCases":"2" 
+	"payload":  
+	{
+		"QID.HHold": "1",
+        "QHAdmin.HOut": "110",
+        "QHAdmin.IntNum": "1001",
+        "Mode": "1",
+        "Processed": "2",
+        "QDataBag.PostCode": "XX999XX",
+        "QHousehold.QHHold.Person[1].Sex": "1",
+        "QHousehold.QHHold.Person[1].tmpDoB": "1/1/1980",
+        "QHousehold.QHHold.Person[1].DVAge": "40"
+		}
     }
 
 
