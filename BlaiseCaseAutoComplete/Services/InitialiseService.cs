@@ -2,6 +2,7 @@
 using System.Linq;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
+using BlaiseCaseAutoComplete.Interfaces.Providers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
 using log4net;
 
@@ -13,17 +14,20 @@ namespace BlaiseCaseAutoComplete.Services
         private readonly IQueueService _queueService;
         private readonly IMessageHandler _messageHandler;
         private readonly IFluentBlaiseApi _blaiseApi;
+        private readonly IConfigurationProvider _configurationProvider;
 
         public InitialiseService(
             ILog logger,
             IQueueService queueService,
             IMessageHandler messageHandler,
-            IFluentBlaiseApi blaiseApi)
+            IFluentBlaiseApi blaiseApi, 
+            IConfigurationProvider configurationProvider)
         {
             _logger = logger;
             _queueService = queueService;
             _messageHandler = messageHandler;
             _blaiseApi = blaiseApi;
+            _configurationProvider = configurationProvider;
         }
 
         public void Start()
@@ -31,7 +35,7 @@ namespace BlaiseCaseAutoComplete.Services
             try
             {
                 LogAllServerParksOnVm();
-                _logger.Info("Subscribing to topic");
+                _logger.Info($"Subscribing to '{_configurationProvider.SubscriptionId}' on project'{_configurationProvider.ProjectId}'");
 
                 _queueService.Subscribe(_messageHandler);
 
@@ -55,14 +59,13 @@ namespace BlaiseCaseAutoComplete.Services
             {
                 _logger.Info($"{serverParkName}");
             }
-
         }
 
         public void Stop()
         {
-            _logger.Info("Stopping subscription to topic - updated");
+            _logger.Info($"Stopping subscription to '{_configurationProvider.SubscriptionId}'");
             _queueService.CancelAllSubscriptions();
-            _logger.Info("Subscription stopped - updated");
+            _logger.Info("Subscription stopped");
         }
     }
 }

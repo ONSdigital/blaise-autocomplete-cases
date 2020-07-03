@@ -1,6 +1,7 @@
 ﻿using System;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
+using BlaiseCaseAutoComplete.Interfaces.Providers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
 using BlaiseCaseAutoComplete.Services;
 using log4net;
@@ -15,6 +16,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<IQueueService> _queueServiceMock;
         private Mock<IMessageHandler> _messageHandlerMock;
         private Mock<IFluentBlaiseApi> _blaiseApiMock;
+        private Mock<IConfigurationProvider> _configurationProviderMock;
 
         private InitialiseService _sut;
 
@@ -25,12 +27,14 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _queueServiceMock = new Mock<IQueueService>();
             _messageHandlerMock = new Mock<IMessageHandler>();
             _blaiseApiMock = new Mock<IFluentBlaiseApi>();
+            _configurationProviderMock = new Mock<IConfigurationProvider>();
 
             _sut = new InitialiseService(
                 _loggingMock.Object,
                 _queueServiceMock.Object,
                 _messageHandlerMock.Object,
-                _blaiseApiMock.Object);
+                _blaiseApiMock.Object,
+                _configurationProviderMock.Object);
         }
 
         [Test]
