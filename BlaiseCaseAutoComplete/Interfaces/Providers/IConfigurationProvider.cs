@@ -5,7 +5,5 @@
         string ProjectId { get; }
 
         string SubscriptionId { get; }
-
-        string TopicId { get; }
     }
 }

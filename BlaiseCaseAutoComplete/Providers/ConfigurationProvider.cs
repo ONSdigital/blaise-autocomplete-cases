@@ -8,7 +8,5 @@ namespace BlaiseCaseAutoComplete.Providers
         public string ProjectId => ConfigurationManager.AppSettings["ProjectId"];
 
         public string SubscriptionId => ConfigurationManager.AppSettings["SubscriptionId"];
-
-        public string TopicId => ConfigurationManager.AppSettings["TopicId"];      
     }
 }

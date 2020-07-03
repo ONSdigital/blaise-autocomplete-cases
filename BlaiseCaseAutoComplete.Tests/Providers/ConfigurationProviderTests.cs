@@ -23,19 +23,6 @@ namespace BlaiseCaseAutoComplete.Tests.Providers
         }
 
         [Test]
-        public void Given_I_Call_TopicId_I_Get_The_Correct_Value_Back()
-        {
-            //arrange
-            var configurationProvider = new ConfigurationProvider();
-
-            //act
-            var result = configurationProvider.TopicId;
-
-            //assert
-            Assert.AreEqual("TopicIdTest", result);
-        }
-
-        [Test]
         public void Given_I_Call_SubscriptionId_I_Get_The_Correct_Value_Back()
         {
             //arrange

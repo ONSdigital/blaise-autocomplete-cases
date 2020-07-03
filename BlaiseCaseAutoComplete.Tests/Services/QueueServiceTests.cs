@@ -13,7 +13,6 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<IFluentQueueApi> _queueProviderMock;
 
         private readonly string _projectId;
-        private readonly string _topicId;
         private readonly string _subscriptionId;
 
         private QueueService _sut;
@@ -21,7 +20,6 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         public QueueServiceTests()
         {
             _projectId = "ProjectId";
-            _topicId = "TopicId";
             _subscriptionId = "SubscriptionId";
         }
 
@@ -31,7 +29,6 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _configurationProviderMock = new Mock<IConfigurationProvider>();
             _configurationProviderMock.Setup(c => c.ProjectId).Returns(_projectId);
             _configurationProviderMock.Setup(c => c.SubscriptionId).Returns(_subscriptionId);
-            _configurationProviderMock.Setup(c => c.TopicId).Returns(_topicId);
 
             _messageHandlerMock = new Mock<IMessageHandler>();
 
