@@ -89,7 +89,7 @@ namespace BlaiseCaseAutoComplete.Services
                 .WithServerPark(model.ServerPark)
                 .Case
                 .WithDataRecord(dataRecord)
-                .WithStatus(StatusType.Completed)
+                .WithStatus(CaseStatusType.Completed)
                 .Update();
         }
     }
