@@ -6,5 +6,7 @@ namespace BlaiseCaseAutoComplete.Interfaces.Services
     {
         void CancelAllSubscriptions();
         void Subscribe(IMessageHandler messageHandler);
+
+        void PublishMessage(string message);
     }
 }

@@ -12,17 +12,20 @@ namespace BlaiseCaseAutoComplete.MessageHandler
         private readonly IModelMapper _mapper;
         private readonly IAutoCompleteCasesService _autoCompleteCasesService;
         private readonly ICompleteCaseService _completeCaseService;
+        private readonly IQueueService _queueService;
 
         public AutoCompleteCaseHandler(
             ILog logger,
             IModelMapper mapper, 
             IAutoCompleteCasesService autoCompleteCasesService, 
-            ICompleteCaseService completeCaseService)
+            ICompleteCaseService completeCaseService, 
+            IQueueService queueService)
         {
             _logger = logger;
             _mapper = mapper;
             _autoCompleteCasesService = autoCompleteCasesService;
             _completeCaseService = completeCaseService;
+            _queueService = queueService;
         }
 
         public bool HandleMessage(string message)
@@ -42,6 +45,9 @@ namespace BlaiseCaseAutoComplete.MessageHandler
                     _autoCompleteCasesService.CompleteCases(model);
                 }
 
+                //assuming we have completed case(s) we want to trigger the case monitor system 
+                TriggerCaseMonitor();
+
                 _logger.Info($"Message processed '{message}'");
 
                 return true;
@@ -53,6 +59,11 @@ namespace BlaiseCaseAutoComplete.MessageHandler
 
                 return false;
             }                       
-        }        
+        }
+
+        private void TriggerCaseMonitor()
+        {
+            _queueService.PublishMessage(@"{ ""ACTION"":""inspect""}");
+        }
     }
 }

@@ -28,6 +28,14 @@ namespace BlaiseCaseAutoComplete.Services
                 .StartConsuming(messageHandler);
         }
 
+        public void PublishMessage(string message)
+        {
+            _queueProvider
+                .WithProject(_configurationProvider.ProjectId)
+                .WithTopic(_configurationProvider.PublishTopicId)
+                .Publish(message);
+        }
+
         public void CancelAllSubscriptions()
         {
             _queueProvider
