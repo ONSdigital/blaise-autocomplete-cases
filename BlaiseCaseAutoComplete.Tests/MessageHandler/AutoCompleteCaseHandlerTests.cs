@@ -15,6 +15,7 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
         private Mock<IModelMapper> _mapperMock;
         private Mock<IAutoCompleteCasesService> _autoCompleteCasesServiceMock;
         private Mock<ICompleteCaseService> _completeCaseServiceMock;
+        private Mock<IQueueService> _queueServiceMock;
 
         private readonly string _message;
         private readonly AutoCompleteCaseModel _caseModel;
@@ -39,11 +40,14 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
 
             _completeCaseServiceMock = new Mock<ICompleteCaseService>();
 
+            _queueServiceMock = new Mock<IQueueService>();
+
             _sut = new AutoCompleteCaseHandler(
                 _loggingMock.Object,
                 _mapperMock.Object,
                 _autoCompleteCasesServiceMock.Object,
-                _completeCaseServiceMock.Object);
+                _completeCaseServiceMock.Object,
+                _queueServiceMock.Object);
         }
 
         [Test]
@@ -88,6 +92,20 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
         }
 
         [Test]
+        public void Given_A_Specific_Case_Message_Is_Handled_Successfully_Then_The_Case_Monitor_Service_Is_triggered()
+        {
+            //arrange
+            _caseModel.PrimaryKey = "Key1";
+            _completeCaseServiceMock.Setup(c => c.CompleteCase(It.IsAny<AutoCompleteCaseModel>()));
+
+            //act
+            _sut.HandleMessage(_message);
+
+            //assert
+            _queueServiceMock.Verify(q => q.PublishMessage(@"{ ""ACTION"":""inspect""}"), Times.Once);
+        }
+
+        [Test]
         public void Given_A_Non_Specific_Case_Message_Is_Handled_Successfully_Then_The_Correct_Service_Is_Called()
         {
             //arrange
@@ -100,6 +118,20 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
             //assert
             _autoCompleteCasesServiceMock.Verify(v => v.CompleteCases(_caseModel), Times.Once);
             _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<AutoCompleteCaseModel>()), Times.Never);
+        }
+
+        [Test]
+        public void Given_A_Non_Specific_Case_Message_Is_Handled_Successfully_Then_The_Case_Monitor_Service_Is_triggered()
+        {
+            //arrange
+            _caseModel.PrimaryKey = null;
+            _autoCompleteCasesServiceMock.Setup(c => c.CompleteCases(It.IsAny<AutoCompleteCaseModel>()));
+
+            //act
+            _sut.HandleMessage(_message);
+
+            //assert
+            _queueServiceMock.Verify(q => q.PublishMessage(@"{ ""ACTION"":""inspect""}"), Times.Once);
         }
 
         [Test]

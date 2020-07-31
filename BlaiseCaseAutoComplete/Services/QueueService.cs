@@ -19,10 +19,21 @@ namespace BlaiseCaseAutoComplete.Services
 
         public void Subscribe(IMessageHandler messageHandler)
         {
+            var subscriptionId = $"{_configurationProvider.SubscriptionId}-{_configurationProvider.VmName}";
+
             _queueProvider
                 .WithProject(_configurationProvider.ProjectId)
-                .WithSubscription(_configurationProvider.SubscriptionId)
+                .WithTopic(_configurationProvider.SubscriptionTopicId)
+                .CreateSubscription(subscriptionId)
                 .StartConsuming(messageHandler);
+        }
+
+        public void PublishMessage(string message)
+        {
+            _queueProvider
+                .WithProject(_configurationProvider.ProjectId)
+                .WithTopic(_configurationProvider.PublishTopicId)
+                .Publish(message);
         }
 
         public void CancelAllSubscriptions()

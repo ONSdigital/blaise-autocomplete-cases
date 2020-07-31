@@ -13,14 +13,18 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<IFluentQueueApi> _queueProviderMock;
 
         private readonly string _projectId;
+        private readonly string _subscriptionTopicId;
         private readonly string _subscriptionId;
+        private readonly string _vmName;
 
         private QueueService _sut;
 
         public QueueServiceTests()
         {
             _projectId = "ProjectId";
+            _subscriptionTopicId = "subscriptionTopicId";
             _subscriptionId = "SubscriptionId";
+            _vmName = "VmName";
         }
 
         [SetUp]
@@ -29,6 +33,8 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _configurationProviderMock = new Mock<IConfigurationProvider>();
             _configurationProviderMock.Setup(c => c.ProjectId).Returns(_projectId);
             _configurationProviderMock.Setup(c => c.SubscriptionId).Returns(_subscriptionId);
+            _configurationProviderMock.Setup(c => c.SubscriptionTopicId).Returns(_subscriptionTopicId);
+            _configurationProviderMock.Setup(c => c.VmName).Returns(_vmName);
 
             _messageHandlerMock = new Mock<IMessageHandler>();
 
@@ -44,7 +50,8 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         {
             //arrange
             _queueProviderMock.Setup(q => q.WithProject(It.IsAny<string>())).Returns(_queueProviderMock.Object);
-            _queueProviderMock.Setup(q => q.WithSubscription(It.IsAny<string>())).Returns(_queueProviderMock.Object);
+            _queueProviderMock.Setup(q => q.WithTopic(It.IsAny<string>())).Returns(_queueProviderMock.Object);
+            _queueProviderMock.Setup(q => q.CreateSubscription(It.IsAny<string>(), It.IsAny<int>())).Returns(_queueProviderMock.Object);
             _queueProviderMock.Setup(q => q.StartConsuming(It.IsAny<IMessageHandler>(), It.IsAny<bool>()));
 
             //act
@@ -52,7 +59,8 @@ namespace BlaiseCaseAutoComplete.Tests.Services
 
             //assert
             _queueProviderMock.Verify(v => v.WithProject(_projectId), Times.Once);
-            _queueProviderMock.Verify(v => v.WithSubscription(_subscriptionId), Times.Once);
+            _queueProviderMock.Verify(v => v.WithTopic(_subscriptionTopicId), Times.Once);
+            _queueProviderMock.Verify(v => v.CreateSubscription($"{_subscriptionId}-{_vmName}", It.IsAny<int>()), Times.Once);
             _queueProviderMock.Verify(v => v.StartConsuming(_messageHandlerMock.Object, It.IsAny<bool>()), Times.Once);
         }
 

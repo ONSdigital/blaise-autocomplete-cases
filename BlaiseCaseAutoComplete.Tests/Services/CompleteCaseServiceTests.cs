@@ -70,7 +70,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Setup(b => b
                 .Case
                 .WithDataRecord(It.IsAny<IDataRecord>())
-                .WithStatus(It.IsAny<StatusType>())
+                .WithStatus(It.IsAny<CaseStatusType>())
                 .Update());
 
             _sut = new CompleteCaseService(_loggingMock.Object, _blaiseApiMock.Object);
@@ -159,7 +159,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Verify(v => v
                 .Case
                 .WithDataRecord(_dataRecord.Object)
-                .WithStatus(StatusType.Completed)
+                .WithStatus(CaseStatusType.Completed)
                 .Update(), Times.Once);
         }
 
@@ -179,7 +179,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Verify(v => v
                 .Case
                 .WithDataRecord(It.IsAny<IDataRecord>())
-                .WithStatus(It.IsAny<StatusType>())
+                .WithStatus(It.IsAny<CaseStatusType>())
                 .Update(), Times.Never);
         }
 
@@ -250,7 +250,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             //assert
             _blaiseApiMock.Verify(v => v.Case
                 .WithDataRecord(_dataRecord.Object)
-                .WithStatus(StatusType.Completed)
+                .WithStatus(CaseStatusType.Completed)
                 .Update()
                 , Times.Once);
         }
