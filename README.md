@@ -10,8 +10,8 @@ Example message to complete an OPN telephone interview for a specific case:
 
 ```
 {
-  "instrument_name":"OPN2004A",
   "server_park":"tel",
+  "instrument_name":"OPN2004A",
   "primary_key":"1000011",
   "NumberOfCases":0,
   "payload":
@@ -31,8 +31,8 @@ Example message to complete 10 random OPN telephone interview cases:
 
 ```
 {
-  "instrument_name":"OPN2004A",
   "server_park":"tel",
+  "instrument_name":"OPN2004A",
   "NumberOfCases":10,
   "payload":
     {
@@ -51,8 +51,8 @@ Example message to complete 10 random OPN web interview cases:
 
 ```
 {
-  "instrument_name":"OPN2004A",
   "server_park":"tel",
+  "instrument_name":"OPN2004A",
   "NumberOfCases":10,
   "payload":
     {
