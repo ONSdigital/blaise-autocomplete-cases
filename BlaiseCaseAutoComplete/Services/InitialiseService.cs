@@ -51,7 +51,9 @@ namespace BlaiseCaseAutoComplete.Services
 
         private void LogAllServerParksOnVm()
         {
-            var serverParkNames = _blaiseApi.ServerParks.ToList();
+            var serverParkNames = _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
+                .ServerParks.ToList();
 
             _logger.Info($"Found '{serverParkNames.Count}' server parks");
 
