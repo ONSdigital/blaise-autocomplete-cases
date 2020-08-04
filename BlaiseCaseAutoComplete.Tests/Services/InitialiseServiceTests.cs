@@ -1,5 +1,6 @@
 ﻿using System;
 using Blaise.Nuget.Api.Contracts.Interfaces;
+using Blaise.Nuget.Api.Contracts.Models;
 using Blaise.Nuget.PubSub.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Interfaces.Providers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
@@ -27,6 +28,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _queueServiceMock = new Mock<IQueueService>();
             _messageHandlerMock = new Mock<IMessageHandler>();
             _blaiseApiMock = new Mock<IFluentBlaiseApi>();
+            _blaiseApiMock.Setup(b => b.WithConnection(It.IsAny<ConnectionModel>())).Returns(_blaiseApiMock.Object);
             _configurationProviderMock = new Mock<IConfigurationProvider>();
 
             _sut = new InitialiseService(
