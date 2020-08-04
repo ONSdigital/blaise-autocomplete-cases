@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Blaise.Nuget.Api.Contracts.Enums;
 using Blaise.Nuget.Api.Contracts.Interfaces;
+using Blaise.Nuget.Api.Contracts.Models;
 using BlaiseCaseAutoComplete.Models;
 using BlaiseCaseAutoComplete.Services;
 using log4net;
@@ -53,6 +54,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _loggingMock = new Mock<ILog>();
 
             _blaiseApiMock = new Mock<IFluentBlaiseApi>();
+            _blaiseApiMock.Setup(b => b.WithConnection(It.IsAny<ConnectionModel>())).Returns(_blaiseApiMock.Object);
             _blaiseApiMock.Setup(b => b.WithInstrument(It.IsAny<string>())).Returns(_blaiseApiMock.Object);
             _blaiseApiMock.Setup(b => b.WithServerPark(It.IsAny<string>())).Returns(_blaiseApiMock.Object);
             

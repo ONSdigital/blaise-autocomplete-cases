@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Blaise.Nuget.Api.Contracts.Interfaces;
+using Blaise.Nuget.Api.Contracts.Models;
 using BlaiseCaseAutoComplete.Interfaces.Services;
 using BlaiseCaseAutoComplete.Models;
 using BlaiseCaseAutoComplete.Services;
@@ -56,6 +57,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _loggingMock = new Mock<ILog>();
             
             _blaiseApiMock = new Mock<IFluentBlaiseApi>();
+            _blaiseApiMock.Setup(b => b.WithConnection(It.IsAny<ConnectionModel>())).Returns(_blaiseApiMock.Object);
             _blaiseApiMock.Setup(b => b.WithInstrument(_instrumentName)).Returns(_blaiseApiMock.Object);
             _blaiseApiMock.Setup(b => b.WithServerPark(_serverParkName)).Returns(_blaiseApiMock.Object);
 

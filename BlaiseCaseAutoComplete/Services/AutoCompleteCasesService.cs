@@ -32,7 +32,9 @@ namespace BlaiseCaseAutoComplete.Services
             model.NumberOfCases.ThrowExceptionIfLessThanOrEqualToZero("NumberOfCases");
 
             var caseCompletedCounter = 0;
-            var surveys = _blaiseApi.Surveys.ToList();
+            var surveys = _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
+                .Surveys.ToList();
 
             _logger.Info($"Found '{surveys.Count}' surveys");
 
@@ -68,6 +70,7 @@ namespace BlaiseCaseAutoComplete.Services
         private IDataSet GetCases(ISurvey survey)
         {
             return _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
                 .WithInstrument(survey.Name)
                 .WithServerPark(survey.ServerPark)
                 .Cases;
@@ -76,6 +79,7 @@ namespace BlaiseCaseAutoComplete.Services
         private bool CaseIsComplete(IDataRecord dataRecord, ISurvey survey)
         {
             return _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
                 .WithInstrument(survey.Name)
                 .WithServerPark(survey.ServerPark)
                 .Case

@@ -53,6 +53,7 @@ namespace BlaiseCaseAutoComplete.Services
         private bool CaseExists(AutoCompleteCaseModel model)
         {
             return _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
                 .WithInstrument(model.InstrumentName)
                 .WithServerPark(model.ServerPark)
                 .Case
@@ -63,6 +64,7 @@ namespace BlaiseCaseAutoComplete.Services
         private IDataRecord GetCase(AutoCompleteCaseModel model)
         {
             return _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
                 .WithInstrument(model.InstrumentName)
                 .WithServerPark(model.ServerPark)
                 .Case
@@ -73,6 +75,7 @@ namespace BlaiseCaseAutoComplete.Services
         private void UpdateDataRecord(IDataRecord dataRecord, AutoCompleteCaseModel model)
         {
             _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
                 .WithInstrument(model.InstrumentName)
                 .WithServerPark(model.ServerPark)
                 .Case
@@ -85,6 +88,7 @@ namespace BlaiseCaseAutoComplete.Services
         private void MarkAsComplete(IDataRecord dataRecord, AutoCompleteCaseModel model)
         {
             _blaiseApi
+                .WithConnection(_blaiseApi.DefaultConnection)
                 .WithInstrument(model.InstrumentName)
                 .WithServerPark(model.ServerPark)
                 .Case
