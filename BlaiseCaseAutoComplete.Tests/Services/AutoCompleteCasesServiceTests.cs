@@ -10,7 +10,6 @@ using Moq;
 using NUnit.Framework;
 using StatNeth.Blaise.API.DataLink;
 using StatNeth.Blaise.API.DataRecord;
-using StatNeth.Blaise.API.ServerManager;
 
 namespace BlaiseCaseAutoComplete.Tests.Services
 {
@@ -22,7 +21,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<IFluentBlaiseApi> _blaiseApiMock;
         private Mock<IDataSet> _dataSetMock;
         private Mock<ICompleteCaseService> _completeCaseServiceMock;
-        private readonly List<ISurvey> _surveys;
+
         private readonly string _instrumentName;
         private readonly string _serverParkName;
 
@@ -33,10 +32,6 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _instrumentName = "OPN2004A";
             _serverParkName = "TEL";
 
-            var survey1Mock = new Mock<ISurvey>();
-            survey1Mock.Setup(a => a.Name).Returns(_instrumentName);
-            survey1Mock.Setup(a => a.ServerPark).Returns(_serverParkName);
-            _surveys = new List<ISurvey> { survey1Mock.Object};
         }
 
         [SetUp]
@@ -44,9 +39,8 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         {
             _caseModel = new AutoCompleteCaseModel
             {
-                InstrumentName = "OPN2000",
-                ServerPark = "Park1",
-                PrimaryKey = "Key1",
+                InstrumentName = _instrumentName,
+                ServerPark = _serverParkName,
                 NumberOfCases = 10,
                 Payload = new Dictionary<string, string>
                 {
@@ -60,6 +54,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Setup(b => b.WithConnection(It.IsAny<ConnectionModel>())).Returns(_blaiseApiMock.Object);
             _blaiseApiMock.Setup(b => b.WithInstrument(_instrumentName)).Returns(_blaiseApiMock.Object);
             _blaiseApiMock.Setup(b => b.WithServerPark(_serverParkName)).Returns(_blaiseApiMock.Object);
+            _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(true);
 
             _dataSetMock = new Mock<IDataSet>();
             _completeCaseServiceMock = new Mock<ICompleteCaseService>();
@@ -99,20 +94,23 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         }
 
         [Test]
-        public void Given_No_Instruments_Available_When_I_Call_CompleteCases_No_Cases_Are_Processed()
+        public void Given_Survey_Does_Not_Exist_When_I_Call_CompleteCases_No_Cases_Are_Processed()
         {
+            //arrange
+            _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(false);
+
             //act
             _sut.CompleteCases(_caseModel);
 
             //assert
-            _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<IDataRecord>(), _caseModel), Times.Never);
+            _completeCaseServiceMock.VerifyNoOtherCalls();
         }
 
         [Test]
         public void Given_All_Cases_Are_Already_Complete_When_I_Call_CompleteCases_No_Cases_Are_Processed()
         {
             //arrange
-            _blaiseApiMock.Setup(p => p.Surveys).Returns(_surveys);
+            _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(true);
             _dataSetMock.SetupSequence(d => d.EndOfSet)
                 .Returns(false)
                 .Returns(true);
@@ -136,7 +134,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             //arrange
             _caseModel.NumberOfCases = casesToComplete;
 
-            _blaiseApiMock.Setup(p => p.Surveys).Returns(_surveys);
+            _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(true);
 
             var sequence = _dataSetMock.SetupSequence(c => c.EndOfSet);
             for (int i = 0; i < casesAvailable; i++)

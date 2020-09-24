@@ -18,7 +18,7 @@ namespace BlaiseCaseAutoComplete.Services
 
         public AutoCompleteCasesService(
             ILog logger,
-            IFluentBlaiseApi blaiseApi, 
+            IFluentBlaiseApi blaiseApi,
             ICompleteCaseService completeCaseService)
         {
             _logger = logger;
@@ -32,56 +32,51 @@ namespace BlaiseCaseAutoComplete.Services
             model.NumberOfCases.ThrowExceptionIfLessThanOrEqualToZero("NumberOfCases");
 
             var caseCompletedCounter = 0;
-            var surveys = _blaiseApi
+
+            if (!_blaiseApi
+                .WithInstrument(model.InstrumentName)
+                .WithServerPark(model.ServerPark)
                 .WithConnection(_blaiseApi.DefaultConnection)
-                .Surveys.ToList();
-
-            _logger.Info($"Found '{surveys.Count}' surveys");
-
-            foreach (var survey in surveys)
+                .Survey
+                .Exists)
             {
-                _logger.Info($"Getting cases for survey '{survey.Name}' on server park '{survey.ServerPark}'");
-                var dataSet = GetCases(survey);
+                _logger.Warn($"The survey '{model.InstrumentName}' does not exist on server park '{model.ServerPark}'");
+                return;
+            }
 
-                while (!dataSet.EndOfSet)
+            _logger.Info($"Getting cases for survey '{model.InstrumentName}' on server park '{model.ServerPark}'");
+            var dataSet = GetCases(model);
+
+            while (!dataSet.EndOfSet)
+            {
+                if (model.NumberOfCases == caseCompletedCounter) break;
+
+                if (!CaseIsComplete(dataSet.ActiveRecord))
                 {
-                    if (model.NumberOfCases == caseCompletedCounter) break;
+                    _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
 
-                    if (!CaseIsComplete(dataSet.ActiveRecord, survey))
-                    {
-                        _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
-                    
-                        caseCompletedCounter++;
-                    }
-                    dataSet.MoveNext();
+                    caseCompletedCounter++;
                 }
+                dataSet.MoveNext();
             }
 
-            if (caseCompletedCounter == 0)
-            {
-                _logger.Info("No Cases Found to Complete");
-            }
-            else
-            {
-                _logger.Info($"Completed {caseCompletedCounter} cases");
-            }
+            _logger.Info(caseCompletedCounter == 0
+                ? "No Cases Found to Complete"
+                : $"Completed {caseCompletedCounter} cases");
         }
 
-        private IDataSet GetCases(ISurvey survey)
+        private IDataSet GetCases(AutoCompleteCaseModel caseModel)
         {
             return _blaiseApi
                 .WithConnection(_blaiseApi.DefaultConnection)
-                .WithInstrument(survey.Name)
-                .WithServerPark(survey.ServerPark)
+                .WithInstrument(caseModel.InstrumentName)
+                .WithServerPark(caseModel.ServerPark)
                 .Cases;
         }
 
-        private bool CaseIsComplete(IDataRecord dataRecord, ISurvey survey)
+        private bool CaseIsComplete(IDataRecord dataRecord)
         {
             return _blaiseApi
-                .WithConnection(_blaiseApi.DefaultConnection)
-                .WithInstrument(survey.Name)
-                .WithServerPark(survey.ServerPark)
                 .Case
                 .WithDataRecord(dataRecord)
                 .Completed;
