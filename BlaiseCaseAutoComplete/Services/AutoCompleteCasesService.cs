@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Helpers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
@@ -33,36 +34,48 @@ namespace BlaiseCaseAutoComplete.Services
 
             var caseCompletedCounter = 0;
 
-            if (!_blaiseApi
-                .WithInstrument(model.InstrumentName)
-                .WithServerPark(model.ServerPark)
-                .WithConnection(_blaiseApi.DefaultConnection)
-                .Survey
-                .Exists)
+            try
             {
-                _logger.Warn($"The survey '{model.InstrumentName}' does not exist on server park '{model.ServerPark}'");
-                return;
-            }
-
-            _logger.Info($"Getting cases for survey '{model.InstrumentName}' on server park '{model.ServerPark}'");
-            var dataSet = GetCases(model);
-
-            while (!dataSet.EndOfSet)
-            {
-                if (model.NumberOfCases == caseCompletedCounter) break;
-
-                if (!CaseIsComplete(dataSet.ActiveRecord))
+                if (!_blaiseApi
+                    .WithInstrument(model.InstrumentName)
+                    .WithServerPark(model.ServerPark)
+                    .WithConnection(_blaiseApi.DefaultConnection)
+                    .Survey
+                    .Exists)
                 {
-                    _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
-
-                    caseCompletedCounter++;
+                    _logger.Warn(
+                        $"The survey '{model.InstrumentName}' does not exist on server park '{model.ServerPark}'");
+                    return;
                 }
-                dataSet.MoveNext();
-            }
 
-            _logger.Info(caseCompletedCounter == 0
-                ? "No Cases Found to Complete"
-                : $"Completed {caseCompletedCounter} cases");
+                _logger.Info($"Getting cases for survey '{model.InstrumentName}' on server park '{model.ServerPark}'");
+                var dataSet = GetCases(model);
+
+                while (!dataSet.EndOfSet)
+                {
+                    if (model.NumberOfCases == caseCompletedCounter) break;
+
+                    if (!CaseIsComplete(dataSet.ActiveRecord))
+                    {
+                        _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
+
+                        caseCompletedCounter++;
+                    }
+
+                    dataSet.MoveNext();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Info(e.Message, e.InnerException);
+                throw;
+            }
+            finally
+            {
+                _logger.Info(caseCompletedCounter == 0
+                    ? "No Cases Found to Complete"
+                    : $"Completed {caseCompletedCounter} cases");
+            }
         }
 
         private IDataSet GetCases(AutoCompleteCaseModel caseModel)
