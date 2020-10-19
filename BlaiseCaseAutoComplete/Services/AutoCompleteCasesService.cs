@@ -33,7 +33,7 @@ namespace BlaiseCaseAutoComplete.Services
             model.NumberOfCases.ThrowExceptionIfLessThanOrEqualToZero("NumberOfCases");
 
             var caseCompletedCounter = 0;
-
+            var primaryKey = "";
             try
             {
                 if (!_blaiseApi
@@ -57,6 +57,8 @@ namespace BlaiseCaseAutoComplete.Services
 
                     if (!CaseIsComplete(dataSet.ActiveRecord))
                     {
+                        primaryKey = _blaiseApi.Case.WithDataRecord(dataSet.ActiveRecord).PrimaryKey;
+
                         _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
 
                         caseCompletedCounter++;
@@ -67,7 +69,8 @@ namespace BlaiseCaseAutoComplete.Services
             }
             catch (Exception e)
             {
-                _logger.Info(e.Message, e.InnerException);
+                _logger.Error($"Error whilst processing primary key {primaryKey}");
+                _logger.Error(e.Message, e.InnerException);
                 throw;
             }
             finally
