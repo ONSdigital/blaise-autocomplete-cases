@@ -71,7 +71,7 @@ namespace BlaiseCaseAutoComplete.Services
             {
                 _logger.Info(caseCompletedCounter == 0
                     ? "No Cases Found to populate"
-                    : $"Populates {caseCompletedCounter} cases");
+                    : $"Populated {caseCompletedCounter} cases");
             }
         }
 
