@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Helpers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
@@ -7,7 +6,6 @@ using BlaiseCaseAutoComplete.Models;
 using log4net;
 using StatNeth.Blaise.API.DataLink;
 using StatNeth.Blaise.API.DataRecord;
-using StatNeth.Blaise.API.ServerManager;
 
 namespace BlaiseCaseAutoComplete.Services
 {
@@ -76,8 +74,8 @@ namespace BlaiseCaseAutoComplete.Services
             finally
             {
                 _logger.Info(caseCompletedCounter == 0
-                    ? "No Cases Found to Complete"
-                    : $"Completed {caseCompletedCounter} cases");
+                    ? "No Cases Found to populate"
+                    : $"Populates {caseCompletedCounter} cases");
             }
         }
 
