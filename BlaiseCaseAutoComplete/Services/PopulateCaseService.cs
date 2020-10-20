@@ -7,12 +7,12 @@ using StatNeth.Blaise.API.DataRecord;
 
 namespace BlaiseCaseAutoComplete.Services
 {
-    public class CompleteCaseService : ICompleteCaseService
+    public class PopulateCaseService : IPopulateCaseService
     {
         private readonly ILog _logger;
         private readonly IFluentBlaiseApi _blaiseApi;
 
-        public CompleteCaseService(
+        public PopulateCaseService(
             ILog logger,
             IFluentBlaiseApi blaiseApi)
         {

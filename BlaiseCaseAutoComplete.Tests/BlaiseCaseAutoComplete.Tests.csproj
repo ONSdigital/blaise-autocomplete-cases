@@ -184,10 +184,10 @@
     <Compile Include="Mappers\CompletionModelMapperTests.cs" />
     <Compile Include="MessageHandler\AutoCompleteCaseHandlerTests.cs" />
     <Compile Include="Providers\ConfigurationProviderTests.cs" />
-    <Compile Include="Services\AutoCompleteCasesServiceTests.cs" />
+    <Compile Include="Services\AutoPopulateCasesServiceTests.cs" />
     <Compile Include="Services\InitialiseServiceTests.cs" />
     <Compile Include="Services\QueueServiceTests.cs" />
-    <Compile Include="Services\CompleteCaseServiceTests.cs" />
+    <Compile Include="Services\UpdateCaseServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

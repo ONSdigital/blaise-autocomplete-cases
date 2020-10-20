@@ -2,8 +2,8 @@
 
 namespace BlaiseCaseAutoComplete.Interfaces.Services
 {
-    public interface IAutoCompleteCasesService
+    public interface IAutoPopulateCasesService
     {
-        void CompleteCases(AutoCompleteCaseModel model);
+        void PopulateCases(AutoCompleteCaseModel model);
     }
 }

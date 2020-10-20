@@ -48,8 +48,8 @@ namespace BlaiseCaseAutoComplete
             unityContainer.RegisterType<IMessageHandler, AutoCompleteCaseHandler>();
 
             //services   
-            unityContainer.RegisterType<ICompleteCaseService, CompleteCaseService>();
-            unityContainer.RegisterType<IAutoCompleteCasesService, AutoCompleteCasesService>();
+            unityContainer.RegisterType<IPopulateCaseService, PopulateCaseService>();
+            unityContainer.RegisterType<IAutoPopulateCasesService, AutoPopulateCasesService>();
 
             //queue service
             unityContainer.RegisterType<IQueueService, QueueService>();

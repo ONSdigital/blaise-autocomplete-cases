@@ -13,21 +13,21 @@ using StatNeth.Blaise.API.DataRecord;
 
 namespace BlaiseCaseAutoComplete.Tests.Services
 {
-    public class AutoCompleteCasesServiceTests
+    public class AutoPopulateCasesServiceTests
     {
-        private AutoCompleteCasesService _sut;
+        private AutoPopulateCasesService _sut;
 
         private Mock<ILog> _loggingMock;
         private Mock<IFluentBlaiseApi> _blaiseApiMock;
         private Mock<IDataSet> _dataSetMock;
-        private Mock<ICompleteCaseService> _completeCaseServiceMock;
+        private Mock<IPopulateCaseService> _populateCaseServiceMock;
 
         private readonly string _instrumentName;
         private readonly string _serverParkName;
 
         private AutoCompleteCaseModel _caseModel;
 
-        public AutoCompleteCasesServiceTests()
+        public AutoPopulateCasesServiceTests()
         {
             _instrumentName = "OPN2004A";
             _serverParkName = "TEL";
@@ -57,72 +57,53 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(true);
 
             _dataSetMock = new Mock<IDataSet>();
-            _completeCaseServiceMock = new Mock<ICompleteCaseService>();
-            _sut = new AutoCompleteCasesService(_loggingMock.Object, _blaiseApiMock.Object, _completeCaseServiceMock.Object);
+            _populateCaseServiceMock = new Mock<IPopulateCaseService>();
+            _sut = new AutoPopulateCasesService(_loggingMock.Object, _blaiseApiMock.Object, _populateCaseServiceMock.Object);
         }
 
         [Test]
-        public void Given_A_Null_instrumentName_When_I_Call_CompleteCases_Then_A_ArgumentNullException_Is_Thrown()
+        public void Given_A_Null_instrumentName_When_I_Call_PopulateCases_Then_A_ArgumentNullException_Is_Thrown()
         {
             //arrange
             _caseModel.InstrumentName = null;
 
             //act and assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _sut.CompleteCases(_caseModel));
+            var exception = Assert.Throws<ArgumentNullException>(() => _sut.PopulateCases(_caseModel));
             Assert.AreEqual("InstrumentName", exception.ParamName);
         }
 
         [Test]
-        public void Given_An_Empty_instrumentName_When_I_Call_CompleteCases_Then_An_ArgumentException_Is_Thrown()
+        public void Given_An_Empty_instrumentName_When_I_Call_PopulateCases_Then_An_ArgumentException_Is_Thrown()
         {   
             //arrange
             _caseModel.InstrumentName = string.Empty;
 
-            var exception = Assert.Throws<ArgumentException>(() => _sut.CompleteCases(_caseModel));
+            var exception = Assert.Throws<ArgumentException>(() => _sut.PopulateCases(_caseModel));
             Assert.AreEqual("A value for the argument 'InstrumentName' must be supplied", exception.Message);
         }
 
         [TestCase(-1)]
         [TestCase(0)]
-        public void Given_An_Invalid_NumberOfCasesToComplete_When_I_Call_CompleteCases_Then_An_ArgumentException_Is_Thrown(int numberOfCases)
+        public void Given_An_Invalid_NumberOfCasesToComplete_When_I_Call_PopulateCases_Then_An_ArgumentException_Is_Thrown(int numberOfCases)
         {
             //arrange
             _caseModel.NumberOfCases = numberOfCases;
 
-            var exception = Assert.Throws<ArgumentException>(() => _sut.CompleteCases(_caseModel));
+            var exception = Assert.Throws<ArgumentException>(() => _sut.PopulateCases(_caseModel));
             Assert.AreEqual("NumberOfCases", exception.Message);
         }
 
         [Test]
-        public void Given_Survey_Does_Not_Exist_When_I_Call_CompleteCases_No_Cases_Are_Processed()
+        public void Given_Survey_Does_Not_Exist_When_I_Call_PopulateCases_No_Cases_Are_Processed()
         {
             //arrange
             _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(false);
 
             //act
-            _sut.CompleteCases(_caseModel);
+            _sut.PopulateCases(_caseModel);
 
             //assert
-            _completeCaseServiceMock.VerifyNoOtherCalls();
-        }
-
-        [Test]
-        public void Given_All_Cases_Are_Already_Complete_When_I_Call_CompleteCases_No_Cases_Are_Processed()
-        {
-            //arrange
-            _blaiseApiMock.Setup(b => b.Survey.Exists).Returns(true);
-            _dataSetMock.SetupSequence(d => d.EndOfSet)
-                .Returns(false)
-                .Returns(true);
-
-            _blaiseApiMock.Setup(d => d.Cases).Returns(_dataSetMock.Object);
-            _blaiseApiMock.Setup(s => s.Case.WithDataRecord(It.IsAny<IDataRecord>()).Completed).Returns(true);
-
-            //act
-            _sut.CompleteCases(_caseModel);
-
-            //assert
-            _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<IDataRecord>(), _caseModel), Times.Never);
+            _populateCaseServiceMock.VerifyNoOtherCalls();
         }
 
         [TestCase(1, 1, 1)]
@@ -149,10 +130,10 @@ namespace BlaiseCaseAutoComplete.Tests.Services
             _blaiseApiMock.Setup(s => s.Case.WithDataRecord(It.IsAny<IDataRecord>()).Completed).Returns(false);
 
             //act
-            _sut.CompleteCases(_caseModel);
+            _sut.PopulateCases(_caseModel);
 
             //assert
-            _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<IDataRecord>(), _caseModel), Times.Exactly(expectedCases));
+            _populateCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<IDataRecord>(), _caseModel), Times.Exactly(expectedCases));
         }
     }
 }

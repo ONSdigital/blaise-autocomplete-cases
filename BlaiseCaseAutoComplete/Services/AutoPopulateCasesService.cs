@@ -5,27 +5,26 @@ using BlaiseCaseAutoComplete.Interfaces.Services;
 using BlaiseCaseAutoComplete.Models;
 using log4net;
 using StatNeth.Blaise.API.DataLink;
-using StatNeth.Blaise.API.DataRecord;
 
 namespace BlaiseCaseAutoComplete.Services
 {
-    public class AutoCompleteCasesService : IAutoCompleteCasesService
+    public class AutoPopulateCasesService : IAutoPopulateCasesService
     {
         private readonly ILog _logger;
         private readonly IFluentBlaiseApi _blaiseApi;
-        private readonly ICompleteCaseService _completeCaseService;
+        private readonly IPopulateCaseService _populateCaseService;
 
-        public AutoCompleteCasesService(
+        public AutoPopulateCasesService(
             ILog logger,
             IFluentBlaiseApi blaiseApi,
-            ICompleteCaseService completeCaseService)
+            IPopulateCaseService populateCaseService)
         {
             _logger = logger;
             _blaiseApi = blaiseApi;
-            _completeCaseService = completeCaseService;
+            _populateCaseService = populateCaseService;
         }
 
-        public void CompleteCases(AutoCompleteCaseModel model)
+        public void PopulateCases(AutoCompleteCaseModel model)
         {
             model.InstrumentName.ThrowExceptionIfNullOrEmpty("InstrumentName");
             model.NumberOfCases.ThrowExceptionIfLessThanOrEqualToZero("NumberOfCases");
@@ -53,14 +52,11 @@ namespace BlaiseCaseAutoComplete.Services
                 {
                     if (model.NumberOfCases == caseCompletedCounter) break;
 
-                    if (!CaseIsComplete(dataSet.ActiveRecord))
-                    {
-                        primaryKey = _blaiseApi.Case.WithDataRecord(dataSet.ActiveRecord).PrimaryKey;
+                    primaryKey = _blaiseApi.Case.WithDataRecord(dataSet.ActiveRecord).PrimaryKey;
 
-                        _completeCaseService.CompleteCase(dataSet.ActiveRecord, model);
+                    _populateCaseService.CompleteCase(dataSet.ActiveRecord, model);
 
-                        caseCompletedCounter++;
-                    }
+                    caseCompletedCounter++;
 
                     dataSet.MoveNext();
                 }
@@ -86,14 +82,6 @@ namespace BlaiseCaseAutoComplete.Services
                 .WithInstrument(caseModel.InstrumentName)
                 .WithServerPark(caseModel.ServerPark)
                 .Cases;
-        }
-
-        private bool CaseIsComplete(IDataRecord dataRecord)
-        {
-            return _blaiseApi
-                .Case
-                .WithDataRecord(dataRecord)
-                .Completed;
         }
     }
 }

@@ -13,8 +13,8 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
     {
         private Mock<ILog> _loggingMock;
         private Mock<IModelMapper> _mapperMock;
-        private Mock<IAutoCompleteCasesService> _autoCompleteCasesServiceMock;
-        private Mock<ICompleteCaseService> _completeCaseServiceMock;
+        private Mock<IAutoPopulateCasesService> _autoCompleteCasesServiceMock;
+        private Mock<IPopulateCaseService> _completeCaseServiceMock;
         private Mock<IQueueService> _queueServiceMock;
 
         private readonly string _message;
@@ -36,9 +36,9 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
             _mapperMock = new Mock<IModelMapper>();
             _mapperMock.Setup(m => m.MapToModel(_message)).Returns(_caseModel);
 
-            _autoCompleteCasesServiceMock = new Mock<IAutoCompleteCasesService>();
+            _autoCompleteCasesServiceMock = new Mock<IAutoPopulateCasesService>();
 
-            _completeCaseServiceMock = new Mock<ICompleteCaseService>();
+            _completeCaseServiceMock = new Mock<IPopulateCaseService>();
 
             _queueServiceMock = new Mock<IQueueService>();
 
@@ -88,7 +88,7 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
 
             //assert
             _completeCaseServiceMock.Verify(v => v.CompleteCase(_caseModel), Times.Once);
-            _autoCompleteCasesServiceMock.Verify(v => v.CompleteCases(It.IsAny<AutoCompleteCaseModel>()), Times.Never);
+            _autoCompleteCasesServiceMock.Verify(v => v.PopulateCases(It.IsAny<AutoCompleteCaseModel>()), Times.Never);
         }
 
         [Test]
@@ -110,13 +110,13 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
         {
             //arrange
             _caseModel.PrimaryKey = null;
-            _autoCompleteCasesServiceMock.Setup(c => c.CompleteCases(It.IsAny<AutoCompleteCaseModel>()));
+            _autoCompleteCasesServiceMock.Setup(c => c.PopulateCases(It.IsAny<AutoCompleteCaseModel>()));
 
             //act
             _sut.HandleMessage(_message);
 
             //assert
-            _autoCompleteCasesServiceMock.Verify(v => v.CompleteCases(_caseModel), Times.Once);
+            _autoCompleteCasesServiceMock.Verify(v => v.PopulateCases(_caseModel), Times.Once);
             _completeCaseServiceMock.Verify(v => v.CompleteCase(It.IsAny<AutoCompleteCaseModel>()), Times.Never);
         }
 
@@ -125,7 +125,7 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
         {
             //arrange
             _caseModel.PrimaryKey = null;
-            _autoCompleteCasesServiceMock.Setup(c => c.CompleteCases(It.IsAny<AutoCompleteCaseModel>()));
+            _autoCompleteCasesServiceMock.Setup(c => c.PopulateCases(It.IsAny<AutoCompleteCaseModel>()));
 
             //act
             _sut.HandleMessage(_message);
@@ -140,7 +140,7 @@ namespace BlaiseCaseAutoComplete.Tests.MessageHandler
             //arrange
             _caseModel.PrimaryKey = null;
             var exceptionThrown = new Exception("Error raised");
-            _autoCompleteCasesServiceMock.Setup(p => p.CompleteCases(It.IsAny<AutoCompleteCaseModel>())).Throws(exceptionThrown);
+            _autoCompleteCasesServiceMock.Setup(p => p.PopulateCases(It.IsAny<AutoCompleteCaseModel>())).Throws(exceptionThrown);
 
             //act
             var result = _sut.HandleMessage(_message);

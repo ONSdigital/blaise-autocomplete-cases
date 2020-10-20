@@ -13,9 +13,9 @@ using StatNeth.Blaise.API.ServerManager;
 
 namespace BlaiseCaseAutoComplete.Tests.Services
 {
-    public class CompleteCaseServiceTests
+    public class UpdateCaseServiceTests
     {
-        private CompleteCaseService _sut;
+        private PopulateCaseService _sut;
         private Mock<ILog> _loggingMock;
         private Mock<IFluentBlaiseApi> _blaiseApiMock;
         private readonly string _instrumentName;
@@ -23,7 +23,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         private Mock<IDataRecord> _dataRecord;
         private AutoCompleteCaseModel _caseModel;
 
-        public CompleteCaseServiceTests()
+        public UpdateCaseServiceTests()
         {
             _instrumentName = "OPN2004A";
             _serverParkName = "TEL";
@@ -75,7 +75,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
                 .WithStatus(It.IsAny<CaseStatusType>())
                 .Update());
 
-            _sut = new CompleteCaseService(_loggingMock.Object, _blaiseApiMock.Object);
+            _sut = new PopulateCaseService(_loggingMock.Object, _blaiseApiMock.Object);
         }
 
         [Test]

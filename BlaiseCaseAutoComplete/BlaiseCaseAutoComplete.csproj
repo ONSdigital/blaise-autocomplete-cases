@@ -215,9 +215,9 @@
     <Compile Include="Interfaces\Providers\IConfigurationProvider.cs" />
     <Compile Include="Mappers\ModelMapper.cs" />
     <Compile Include="Models\AutoCompleteCaseModel.cs" />
-    <Compile Include="Services\CompleteCaseService.cs" />
-    <Compile Include="Services\AutoCompleteCasesService.cs" />
-    <Compile Include="Interfaces\Services\IAutoCompleteCasesService.cs" />
+    <Compile Include="Services\PopulateCaseService.cs" />
+    <Compile Include="Services\AutoPopulateCasesService.cs" />
+    <Compile Include="Interfaces\Services\IAutoPopulateCasesService.cs" />
     <Compile Include="Interfaces\Services\IInitialiseService.cs" />
     <Compile Include="Interfaces\Services\IQueueService.cs" />
     <Compile Include="MessageHandler\AutoCompleteCaseHandler.cs" />
@@ -230,7 +230,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\Services\ICompleteCaseService.cs" />
+    <Compile Include="Interfaces\Services\IPopulateCaseService.cs" />
     <Compile Include="Services\InitialiseService.cs" />
     <Compile Include="Services\QueueService.cs" />
   </ItemGroup>

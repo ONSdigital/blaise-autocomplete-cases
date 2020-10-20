@@ -10,15 +10,15 @@ namespace BlaiseCaseAutoComplete.MessageHandler
     {
         private readonly ILog _logger;
         private readonly IModelMapper _mapper;
-        private readonly IAutoCompleteCasesService _autoCompleteCasesService;
-        private readonly ICompleteCaseService _completeCaseService;
+        private readonly IAutoPopulateCasesService _autoCompleteCasesService;
+        private readonly IPopulateCaseService _completeCaseService;
         private readonly IQueueService _queueService;
 
         public AutoCompleteCaseHandler(
             ILog logger,
             IModelMapper mapper, 
-            IAutoCompleteCasesService autoCompleteCasesService, 
-            ICompleteCaseService completeCaseService, 
+            IAutoPopulateCasesService autoCompleteCasesService, 
+            IPopulateCaseService completeCaseService, 
             IQueueService queueService)
         {
             _logger = logger;
@@ -42,7 +42,7 @@ namespace BlaiseCaseAutoComplete.MessageHandler
                 }
                 else
                 {
-                    _autoCompleteCasesService.CompleteCases(model);
+                    _autoCompleteCasesService.PopulateCases(model);
                 }
 
                 //assuming we have completed case(s) we want to trigger the case monitor system 
