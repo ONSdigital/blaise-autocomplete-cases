@@ -17,7 +17,7 @@ Example message to complete an OPN telephone interview for a specific case:
   "payload":
     {
       "Processed":"2",
-      "Complete":"1",
+      "Completed":"1",
       "Mode":"1",
       "QHAdmin.IntNum":"1024",
       "QHAdmin.IntDone":"1",
@@ -37,7 +37,7 @@ Example message to complete 10 random OPN telephone interview cases:
   "payload":
     {
       "Processed":"2",
-      "Complete":"1",
+      "Completed":"1",
       "Mode":"1",
       "QHAdmin.IntNum":"1024",
       "QHAdmin.IntDone":"1",
@@ -57,7 +57,7 @@ Example message to complete 10 random OPN web interview cases:
   "payload":
     {
       "Processed":"2",
-      "Complete":"1",
+      "Completed":"1",
       "Mode":"3",
       "WebFormStatus":"1",
       "WebHOut":"110",
