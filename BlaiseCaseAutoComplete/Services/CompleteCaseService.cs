@@ -1,5 +1,4 @@
-﻿using Blaise.Nuget.Api.Contracts.Enums;
-using Blaise.Nuget.Api.Contracts.Interfaces;
+﻿using Blaise.Nuget.Api.Contracts.Interfaces;
 using BlaiseCaseAutoComplete.Helpers;
 using BlaiseCaseAutoComplete.Interfaces.Services;
 using BlaiseCaseAutoComplete.Models;
@@ -47,7 +46,6 @@ namespace BlaiseCaseAutoComplete.Services
             model.ServerPark.ThrowExceptionIfNullOrEmpty("ServerPark");
 
             UpdateDataRecord(dataRecord, model);
-            MarkAsComplete(dataRecord, model);
         }
 
         private bool CaseExists(AutoCompleteCaseModel model)
@@ -81,19 +79,6 @@ namespace BlaiseCaseAutoComplete.Services
                 .Case
                 .WithDataRecord(dataRecord)
                 .WithData(model.Payload)
-                .Update();
-
-        }
-
-        private void MarkAsComplete(IDataRecord dataRecord, AutoCompleteCaseModel model)
-        {
-            _blaiseApi
-                .WithConnection(_blaiseApi.DefaultConnection)
-                .WithInstrument(model.InstrumentName)
-                .WithServerPark(model.ServerPark)
-                .Case
-                .WithDataRecord(dataRecord)
-                .WithStatus(CaseStatusType.Completed)
                 .Update();
         }
     }

@@ -146,7 +146,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         }
 
         [Test]
-        public void Given_A_Case_Exists_When_I_Call_CompleteCase_With_No_DataRecord_Then_A_Call_To_MarkCaseAsComplete_Is_Made()
+        public void Given_A_Case_Exists_When_I_Call_CompleteCase_With_No_DataRecord_Then_A_Call_To_MarkCaseAsComplete_Is_Not_Made()
         {
             //arrange
             _blaiseApiMock.Setup(b => b
@@ -162,7 +162,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
                 .Case
                 .WithDataRecord(_dataRecord.Object)
                 .WithStatus(CaseStatusType.Completed)
-                .Update(), Times.Once);
+                .Update(), Times.Never);
         }
 
         [Test]
@@ -244,7 +244,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
         }
 
         [Test]
-        public void Given_A_Case_When_I_Call_CompleteCase_Then_A_Call_To_MarkCaseAsComplete_Is_Made()
+        public void Given_A_Case_When_I_Call_CompleteCase_Then_A_Call_To_MarkCaseAsComplete_Is_Not_Made()
         {
             //act
             _sut.CompleteCase(_dataRecord.Object, _caseModel);
@@ -254,7 +254,7 @@ namespace BlaiseCaseAutoComplete.Tests.Services
                 .WithDataRecord(_dataRecord.Object)
                 .WithStatus(CaseStatusType.Completed)
                 .Update()
-                , Times.Once);
+                , Times.Never);
         }
 
         [Test]
