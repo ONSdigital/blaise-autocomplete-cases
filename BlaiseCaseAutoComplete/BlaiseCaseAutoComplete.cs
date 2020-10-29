@@ -34,10 +34,7 @@ namespace BlaiseCaseAutoComplete
         {
             InitializeComponent();
             IUnityContainer unityContainer = new UnityContainer();
-
-            //providers
-            unityContainer.RegisterType<IConfigurationProvider, ConfigurationProvider>();
-
+            
             unityContainer.RegisterSingleton<IFluentQueueApi, FluentQueueApi>();
             unityContainer.RegisterFactory<ILog>(f => LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType));
 
@@ -64,9 +61,11 @@ namespace BlaiseCaseAutoComplete
 
 #if DEBUG
             var credentialKey = ConfigurationManager.AppSettings["GOOGLE_APPLICATION_CREDENTIALS"];
-
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialKey);
 
+            unityContainer.RegisterType<IConfigurationProvider, LocalConfigurationProvider>();
+#else
+            unityContainer.RegisterType<IConfigurationProvider, ConfigurationProvider>();
 #endif
 
             //resolve all dependencies as CaseCreationService is the entry point

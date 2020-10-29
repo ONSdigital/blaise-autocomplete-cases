@@ -224,6 +224,7 @@
     <Compile Include="Interfaces\Providers\IConfigurationProvider.cs" />
     <Compile Include="Mappers\ModelMapper.cs" />
     <Compile Include="Models\AutoCompleteCaseModel.cs" />
+    <Compile Include="Providers\LocalConfigurationProvider.cs" />
     <Compile Include="Services\CompleteCaseService.cs" />
     <Compile Include="Services\AutoCompleteCasesService.cs" />
     <Compile Include="Interfaces\Services\IAutoCompleteCasesService.cs" />

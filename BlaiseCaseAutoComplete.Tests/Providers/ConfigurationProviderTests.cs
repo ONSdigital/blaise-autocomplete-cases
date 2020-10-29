@@ -13,7 +13,7 @@ namespace BlaiseCaseAutoComplete.Tests.Providers
         public void Given_I_Call_ProjectId_I_Get_The_Correct_Value_Back()
         {
             //arrange
-            var configurationProvider = new ConfigurationProvider();
+            var configurationProvider = new LocalConfigurationProvider();
 
             //act
             var result = configurationProvider.ProjectId;
@@ -23,42 +23,29 @@ namespace BlaiseCaseAutoComplete.Tests.Providers
         }
 
         [Test]
-        public void Given_I_Call_PublishTopicId_I_Get_The_Correct_Value_Back()
-        {
-            //arrange
-            var configurationProvider = new ConfigurationProvider();
-
-            //act
-            var result = configurationProvider.PublishTopicId;
-
-            //assert
-            Assert.AreEqual("PublishTopicIdTest", result);
-        }
-
-        [Test]
-        public void Given_I_Call_SubscriptionTopicId_I_Get_The_Correct_Value_Back()
-        {
-            //arrange
-            var configurationProvider = new ConfigurationProvider();
-
-            //act
-            var result = configurationProvider.SubscriptionTopicId;
-
-            //assert
-            Assert.AreEqual("SubscriptionTopicIdTest", result);
-        }
-
-        [Test]
         public void Given_I_Call_SubscriptionId_I_Get_The_Correct_Value_Back()
         {
             //arrange
-            var configurationProvider = new ConfigurationProvider();
+            var configurationProvider = new LocalConfigurationProvider();
 
             //act
             var result = configurationProvider.SubscriptionId;
 
             //assert
             Assert.AreEqual("SubscriptionIdTest", result);
+        }
+
+        [Test]
+        public void Given_I_Call_VmName_I_Get_The_Correct_Value_Back()
+        {
+            //arrange
+            var configurationProvider = new LocalConfigurationProvider();
+
+            //act
+            var result = configurationProvider.VmName;
+
+            //assert
+            Assert.AreEqual("VmNameTest", result);
         }
     }
 }

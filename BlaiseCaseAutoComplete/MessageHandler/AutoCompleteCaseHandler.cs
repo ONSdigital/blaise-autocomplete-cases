@@ -45,9 +45,6 @@ namespace BlaiseCaseAutoComplete.MessageHandler
                     _autoCompleteCasesService.CompleteCases(model);
                 }
 
-                //assuming we have completed case(s) we want to trigger the case monitor system 
-                TriggerCaseMonitor();
-
                 _logger.Info($"Message processed '{message}'");
 
                 return true;
@@ -59,11 +56,6 @@ namespace BlaiseCaseAutoComplete.MessageHandler
 
                 return false;
             }                       
-        }
-
-        private void TriggerCaseMonitor()
-        {
-            _queueService.PublishMessage(@"{ ""ACTION"":""inspect""}");
         }
     }
 }
